@@ -11,8 +11,13 @@ import { ResetPassword } from '@pages';
 import { Profile } from '@pages';
 import { ProfileOrders } from '@pages';
 import { NotFound404 } from '@pages';
+import { Modal } from '@components';
+import { useState } from 'react';
+import { OrderInfo } from '@components';
+import { IngredientDetails } from '@components';
 
 function App() {
+
   return (
     <Routes>
       <Route
@@ -24,13 +29,18 @@ function App() {
           </div>
         }
       ></Route>
-      <Route path={'/feed'} element={<Feed></Feed>}></Route>
+      <Route path={'/feed'} element={<Feed></Feed>}>
+        <Route path={':number'} element={<Modal title='' onClose={()=>{}}><OrderInfo/></Modal>}></Route>
+      </Route>
+      <Route path={'/ingredients/:id'} element={<Modal title='' onClose={()=>{}}><IngredientDetails/></Modal>}></Route>
       <Route path={'/login'} element={<ProtectedRoute><Login/></ProtectedRoute>}></Route>
       <Route path={'/register'} element={<ProtectedRoute><Register/></ProtectedRoute>}></Route>
       <Route path={'/forgot-password'} element={<ProtectedRoute><ForgotPassword/></ProtectedRoute>}></Route>
       <Route path={'/reset-password'} element={<ProtectedRoute><ResetPassword/></ProtectedRoute>}></Route>
       <Route path={'/profile'} element={<ProtectedRoute><Profile/></ProtectedRoute>}></Route>
-      <Route path={'/profile/orders'} element={<ProtectedRoute><ProfileOrders/></ProtectedRoute>}></Route>
+      <Route path={'/profile/orders'} element={<ProtectedRoute><ProfileOrders/></ProtectedRoute>}>
+        <Route path={':number'} element={<Modal title='' onClose={()=>{}}><OrderInfo/></Modal>}></Route>
+      </Route>
       <Route path={'*'} element={<NotFound404/>}></Route>
     </Routes>
   );
