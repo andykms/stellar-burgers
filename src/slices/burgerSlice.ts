@@ -14,16 +14,25 @@ import {
   updateUser,
   logout,
  } from "src/actions/ApiActions";
+import { dispatch } from "src/services/store";
 
 export interface BurgerState {
+  //Все доступные ингредиенты
   ingredients: TIngredient[];
+
+  //Лента заказов
   feeds: TOrdersData;
   userInfo: TUser;
+
+  //Заказы пользователя
   orders: TOrder[];
+
+  //
   currentOrder: TOrder[];
   error: string,
   isLoad: boolean,
   isAuthChecked: boolean,
+  successForgotPassword: boolean;
 }
 
 const initialState: BurgerState = {
@@ -42,6 +51,7 @@ const initialState: BurgerState = {
   error: '',
   isLoad: false,
   isAuthChecked: false,
+  successForgotPassword: false,
 }
 
 export const burgerSlice = createSlice({
@@ -93,6 +103,15 @@ export const burgerSlice = createSlice({
     })
     .addCase(updateUser.fulfilled, (state, action) => {
       state.userInfo = action.payload.user;
+    })
+    .addCase(logout.fulfilled, (state, action) => {
+      dispatch(actions.userLogout());
+    })
+    .addCase(forgotPassword.fulfilled, (state, action) => {
+      state.successForgotPassword = action.payload.success;
+    })
+    .addCase(resetPassword.fulfilled, (state, action) => {
+      state.successForgotPassword = false;
     })
   }
 })

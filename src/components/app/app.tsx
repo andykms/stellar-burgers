@@ -3,6 +3,14 @@ import '../../index.css';
 import styles from './app.module.css';
 import { Routes, Route } from 'react-router-dom';
 import { AppHeader } from '@components';
+import { ProtectedRoute } from '../ProdectedRoute/ProtectedRoute';
+import { Login } from '@pages';
+import { Register } from '@pages';
+import { ForgotPassword } from '@pages';
+import { ResetPassword } from '@pages';
+import { Profile } from '@pages';
+import { ProfileOrders } from '@pages';
+import { NotFound404 } from '@pages';
 
 function App() {
   return (
@@ -17,6 +25,13 @@ function App() {
         }
       ></Route>
       <Route path={'/feed'} element={<Feed></Feed>}></Route>
+      <Route path={'/login'} element={<ProtectedRoute><Login/></ProtectedRoute>}></Route>
+      <Route path={'/register'} element={<ProtectedRoute><Register/></ProtectedRoute>}></Route>
+      <Route path={'/forgot-password'} element={<ProtectedRoute><ForgotPassword/></ProtectedRoute>}></Route>
+      <Route path={'/reset-password'} element={<ProtectedRoute><ResetPassword/></ProtectedRoute>}></Route>
+      <Route path={'/profile'} element={<ProtectedRoute><Profile/></ProtectedRoute>}></Route>
+      <Route path={'/profile/orders'} element={<ProtectedRoute><ProfileOrders/></ProtectedRoute>}></Route>
+      <Route path={'*'} element={<NotFound404/>}></Route>
     </Routes>
   );
 }
