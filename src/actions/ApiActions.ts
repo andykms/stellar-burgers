@@ -11,12 +11,12 @@ import {
   resetPasswordApi,
   getUserApi,
   updateUserApi,
-  logoutApi,
+  logoutApi
 } from '@api';
 import { TRegisterData, TLoginData } from '@api';
-import { getCookie, setCookie } from 'src/utils/cookie';
-import { dispatch } from 'src/services/store';
-import { actions } from 'src/slices/burgerSlice';
+import { getCookie, setCookie } from '../utils/cookie';
+import { dispatch } from '../services/store';
+import { actions } from '../slices/burgerSlice';
 
 function setAccessAndRefreshToken(accessToken: string, refreshToken: string) {
   setCookie('accessToken', accessToken);
@@ -25,101 +25,83 @@ function setAccessAndRefreshToken(accessToken: string, refreshToken: string) {
 
 export const getIngredients = createAsyncThunk(
   'burger/getIngredients',
-  async () => {
-    return await getIngredientsApi();
-  }
+  async () => await getIngredientsApi()
 );
 
-export const getFeeds = createAsyncThunk('burger/getFeeds', async () => {
-  return await getFeedsApi();
-});
+export const getFeeds = createAsyncThunk(
+  'burger/getFeeds',
+  async () => await getFeedsApi()
+);
 
-export const getOrders = createAsyncThunk('burger/getOrders', async () => {
-  return await getOrdersApi();
-});
+export const getOrders = createAsyncThunk(
+  'burger/getOrders',
+  async () => await getOrdersApi()
+);
 
 export const postOrder = createAsyncThunk(
   'burger/postOrder',
-  async (data: string[]) => {
-    return await orderBurgerApi(data);
-  }
+  async (data: string[]) => await orderBurgerApi(data)
 );
 
 export const getOrderByNumber = createAsyncThunk(
   'burger/getOrderByNumber',
-  async (number: number) => {
-    return await getOrderByNumberApi(number);
-  }
+  async (number: number) => await getOrderByNumberApi(number)
 );
 
 export const registerUser = createAsyncThunk(
   'burger/registerUser',
-  async (data: TRegisterData) => {
-    return await registerUserApi(data)
-    .then((data) => {
+  async (data: TRegisterData) =>
+    await registerUserApi(data).then((data) => {
       setAccessAndRefreshToken(data.accessToken, data.refreshToken);
       return data;
-    });
-  }
+    })
 );
 
 export const loginUser = createAsyncThunk(
   'burger/loginUser',
-  async (data: TLoginData) => {
-    return await loginUserApi(data)
-    .then((data) => {
+  async (data: TLoginData) =>
+    await loginUserApi(data).then((data) => {
       setAccessAndRefreshToken(data.accessToken, data.refreshToken);
       return data;
-    });
-  }
+    })
 );
 
 export const forgotPassword = createAsyncThunk(
   'burger/forgotPassword',
-  async (data: { email: string }) => {
-    return await forgotPasswordApi(data);
-  }
+  async (data: { email: string }) => await forgotPasswordApi(data)
 );
 
 export const resetPassword = createAsyncThunk(
   'burger/resetPassword',
-  async (data: { password: string; token: string }) => {
-    return await resetPasswordApi(data);
-  }
+  async (data: { password: string; token: string }) =>
+    await resetPasswordApi(data)
 );
 
-export const getUser = createAsyncThunk('burger/getUser', 
-  async () => {
-    return await getUserApi();
-});
+export const getUser = createAsyncThunk(
+  'burger/getUser',
+  async () => await getUserApi()
+);
 
 export const updateUser = createAsyncThunk(
   'burger/updateUser',
-  async(user: Partial<TRegisterData>)=>{
-    return await updateUserApi(user);
-  }
-)
+  async (user: Partial<TRegisterData>) => await updateUserApi(user)
+);
 
 export const logout = createAsyncThunk(
   'burger/logout',
-  async()=>{
-    return await logoutApi()
-    .then(()=>{
+  async () =>
+    await logoutApi().then(() => {
       localStorage.removeItem('refreshToken');
-      setCookie('accessToken', '', {expires: -1});
+      setCookie('accessToken', '', { expires: -1 });
     })
-  }
-)
+);
 
-export const checkIsAuth = createAsyncThunk(
-  'burger/checkIsAuth',
-  async()=>{
-    if(getCookie('accessToken')) {
-      dispatch(getUser()).finally(()=>{
-        dispatch(actions.authChecked());
-      })
-    } else {
+export const checkIsAuth = createAsyncThunk('burger/checkIsAuth', async () => {
+  if (getCookie('accessToken')) {
+    dispatch(getUser()).finally(() => {
       dispatch(actions.authChecked());
-    }
+    });
+  } else {
+    dispatch(actions.authChecked());
   }
-)
+});

@@ -12,11 +12,18 @@ import { Profile } from '@pages';
 import { ProfileOrders } from '@pages';
 import { NotFound404 } from '@pages';
 import { Modal } from '@components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { OrderInfo } from '@components';
 import { IngredientDetails } from '@components';
+import { dispatch } from '../../services/store';
+import { checkIsAuth } from '../../actions/ApiActions';
 
 function App() {
+
+  useEffect(() => {
+    dispatch(checkIsAuth());
+  }, [dispatch]); 
+
 
   return (
     <Routes>
@@ -28,20 +35,83 @@ function App() {
             <ConstructorPage />
           </div>
         }
-      ></Route>
-      <Route path={'/feed'} element={<Feed></Feed>}>
-        <Route path={':number'} element={<Modal title='' onClose={()=>{}}><OrderInfo/></Modal>}></Route>
+      />
+      <Route path={'/feed'} element={<Feed />}>
+        <Route
+          path={':number'}
+          element={
+            <Modal title='' onClose={() => {}}>
+              <OrderInfo />
+            </Modal>
+          }
+        />
       </Route>
-      <Route path={'/ingredients/:id'} element={<Modal title='' onClose={()=>{}}><IngredientDetails/></Modal>}></Route>
-      <Route path={'/login'} element={<ProtectedRoute><Login/></ProtectedRoute>}></Route>
-      <Route path={'/register'} element={<ProtectedRoute><Register/></ProtectedRoute>}></Route>
-      <Route path={'/forgot-password'} element={<ProtectedRoute><ForgotPassword/></ProtectedRoute>}></Route>
-      <Route path={'/reset-password'} element={<ProtectedRoute><ResetPassword/></ProtectedRoute>}></Route>
-      <Route path={'/profile'} element={<ProtectedRoute><Profile/></ProtectedRoute>}></Route>
-      <Route path={'/profile/orders'} element={<ProtectedRoute><ProfileOrders/></ProtectedRoute>}>
-        <Route path={':number'} element={<Modal title='' onClose={()=>{}}><OrderInfo/></Modal>}></Route>
+      <Route
+        path={'/ingredients/:id'}
+        element={
+          <Modal title='' onClose={() => {}}>
+            <IngredientDetails />
+          </Modal>
+        }
+      />
+      <Route
+        path={'/login'}
+        element={
+          <ProtectedRoute>
+            <Login />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={'/register'}
+        element={
+          <ProtectedRoute>
+            <Register />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={'/forgot-password'}
+        element={
+          <ProtectedRoute>
+            <ForgotPassword />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={'/reset-password'}
+        element={
+          <ProtectedRoute>
+            <ResetPassword />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={'/profile'}
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path={'/profile/orders'}
+        element={
+          <ProtectedRoute>
+            <ProfileOrders />
+          </ProtectedRoute>
+        }
+      >
+        <Route
+          path={':number'}
+          element={
+            <Modal title='' onClose={() => {}}>
+              <OrderInfo />
+            </Modal>
+          }
+        />
       </Route>
-      <Route path={'*'} element={<NotFound404/>}></Route>
+      <Route path={'*'} element={<NotFound404 />} />
     </Routes>
   );
 }

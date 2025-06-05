@@ -1,5 +1,5 @@
-import { selectors } from "src/slices/burgerSlice";
-import { useSelector } from "src/services/store";
+import { selectors } from "../../slices/burgerSlice";
+import { useSelector } from "../../services/store";
 import { Preloader } from "@ui";
 import { Navigate } from "react-router-dom";
 
@@ -15,9 +15,6 @@ export const ProtectedRoute = ({ children }: ProtecedRouteProps) => {
     return <Preloader/>
   }
 
-  if (!userInfo) {
-    return <Navigate to="/login" />;
-  }
 
   return <>{children}</>;
 };
