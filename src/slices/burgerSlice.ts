@@ -14,7 +14,6 @@ import {
   updateUser,
   logout,
  } from "src/actions/ApiActions";
-import { setCookie } from "src/utils/cookie";
 
 export interface BurgerState {
   ingredients: TIngredient[];
@@ -61,6 +60,14 @@ export const burgerSlice = createSlice({
       state.isAuthChecked = true;
     }
   }, 
+  selectors: {
+    ingredients: (state: BurgerState) => state.ingredients,
+    feeds: (state: BurgerState) => state.feeds,
+    orders: (state: BurgerState) => state.orders,
+    currentOrder: (state: BurgerState) => state.currentOrder,
+    userInfo: (state: BurgerState) => state.userInfo,
+    isAuthChecked: (state: BurgerState) => state.isAuthChecked,
+  },
   extraReducers: (builder) =>{
     builder
     .addCase(getIngredients.fulfilled, (state, action) => {
@@ -92,5 +99,5 @@ export const burgerSlice = createSlice({
 
 
 export const actions = burgerSlice.actions;
-export const selectors = burgerSlice.selectors;
+export const selectors  = burgerSlice.selectors;
 export const burgerReducer = burgerSlice.reducer;
