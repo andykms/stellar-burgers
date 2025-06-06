@@ -22,8 +22,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkIsAuth());
-  }, [dispatch]); 
-
+  }, [dispatch]);
 
   return (
     <Routes>

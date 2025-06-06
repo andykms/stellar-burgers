@@ -1,16 +1,13 @@
 import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  getFeeds
-} from '../actions/ApiActions';
-
+import { getFeeds } from '../actions/ApiActions';
 
 //Лента заказов
 export interface feedState {
   feeds: TOrder[];
   total: number;
   totalToday: number;
-  isLoad: boolean,
+  isLoad: boolean;
   error: string;
 }
 
@@ -42,7 +39,7 @@ export const feedSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getFeeds.rejected, (state, action) => {
-      state.error = action.error.message? action.error.message : '';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
     });
     builder.addCase(getFeeds.pending, (state) => {
@@ -52,4 +49,5 @@ export const feedSlice = createSlice({
   }
 });
 
-export const { getFeedsList, getTotal, getTotalToday, isLoadFeed, errorFeed } = feedSlice.selectors;
+export const { getFeedsList, getTotal, getTotalToday, isLoadFeed, errorFeed } =
+  feedSlice.selectors;

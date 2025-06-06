@@ -1,16 +1,13 @@
-import {TOrder} from '@utils-types';
+import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  getOrderByNumber,
-  postOrder
-} from '../actions/ApiActions';
+import { getOrderByNumber, postOrder } from '../actions/ApiActions';
 
 export interface OrderState {
   ingredients: string[];
-  isLoad: boolean,
-  error: string,
+  isLoad: boolean;
+  error: string;
   currentOrders: TOrder[];
-  successOrder: TOrder|null;
+  successOrder: TOrder | null;
 }
 
 const initialState: OrderState = {
@@ -19,7 +16,7 @@ const initialState: OrderState = {
   error: '',
   currentOrders: [],
   successOrder: null
-}
+};
 
 export const orderSlice = createSlice({
   name: 'order',
@@ -49,13 +46,13 @@ export const orderSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getOrderByNumber.rejected, (state, action) => {
-      state.error = action.error.message? action.error.message : '';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
     });
     builder.addCase(getOrderByNumber.pending, (state) => {
       state.isLoad = true;
       state.error = '';
-    })
+    });
     //Отправка заказа
     builder.addCase(postOrder.fulfilled, (state, action) => {
       state.successOrder = action.payload.order;
@@ -63,15 +60,21 @@ export const orderSlice = createSlice({
       state.error = '';
     });
     builder.addCase(postOrder.rejected, (state, action) => {
-      state.error = action.error.message? action.error.message : '';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
     });
     builder.addCase(postOrder.pending, (state) => {
       state.isLoad = true;
       state.error = '';
-    })
+    });
   }
 });
 
 export const { addIngredient, deleteIngredient } = orderSlice.actions;
-export const { getIngredientsIds, isLoadOrder, errorOrder, getCurrentOrders, getSuccessOrder } = orderSlice.selectors;
+export const {
+  getIngredientsIds,
+  isLoadOrder,
+  errorOrder,
+  getCurrentOrders,
+  getSuccessOrder
+} = orderSlice.selectors;

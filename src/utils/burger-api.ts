@@ -1,7 +1,9 @@
 import { setCookie, getCookie } from './cookie';
 import { TIngredient, TOrder, TOrdersData, TUser } from './types';
+// Загрузка переменных среды из файла .env
 
 const URL = process.env.BURGER_API_URL;
+console.log('URL', URL);
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
@@ -72,7 +74,12 @@ type TOrdersResponse = TServerResponse<{
 }>;
 
 export const getIngredientsApi = () =>
-  fetch(`${URL}/ingredients`)
+  fetch(`${URL}/ingredients`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    }
+  })
     .then((res) => checkResponse<TIngredientsResponse>(res))
     .then((data) => {
       if (data?.success) return data.data;

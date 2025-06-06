@@ -9,7 +9,6 @@ import {
   logout
 } from '../actions/ApiActions';
 
-
 //Пользователь
 export interface userState {
   user: TUser;
@@ -22,13 +21,13 @@ export interface userState {
 const initialState: userState = {
   user: {
     name: '',
-    email: '',
+    email: ''
   },
   isLoad: false,
   error: '',
   isSuccessForgotPassword: false,
-  isAuthChecked: false,
-}
+  isAuthChecked: false
+};
 
 export const userSlice = createSlice({
   name: 'user',
@@ -45,7 +44,7 @@ export const userSlice = createSlice({
     isSuccessForgotPassword: (state) => state.isSuccessForgotPassword,
     isAuthChecked: (state) => state.isAuthChecked
   },
-  extraReducers: (builder) =>{
+  extraReducers: (builder) => {
     //Получили пользователя по accessToken
     builder.addCase(getUser.pending, (state) => {
       state.isLoad = true;
@@ -57,7 +56,7 @@ export const userSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getUser.rejected, (state, action) => {
-      state.error = action.error.message?action.error.message:'';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
     });
     //Обновили пользователя
@@ -71,7 +70,7 @@ export const userSlice = createSlice({
       state.error = '';
     });
     builder.addCase(updateUser.rejected, (state, action) => {
-      state.error = action.error.message?action.error.message:'';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
     });
     //Залогинились
@@ -85,9 +84,9 @@ export const userSlice = createSlice({
       state.error = '';
     });
     builder.addCase(loginUser.rejected, (state, action) => {
-      state.error = action.error.message?action.error.message:'';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
-    }) 
+    });
     //Зарегались
     builder.addCase(registerUser.pending, (state) => {
       state.isLoad = true;
@@ -99,9 +98,9 @@ export const userSlice = createSlice({
       state.error = '';
     });
     builder.addCase(registerUser.rejected, (state, action) => {
-      state.error = action.error.message?action.error.message:'';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
-    })
+    });
     //Вышли из аккаунта
     builder.addCase(logout.pending, (state) => {
       state.isLoad = true;
@@ -111,14 +110,14 @@ export const userSlice = createSlice({
       state.user = {
         name: '',
         email: ''
-      }
+      };
       state.isLoad = false;
       state.error = '';
     });
     builder.addCase(logout.rejected, (state, action) => {
-      state.error = action.error.message?action.error.message:'';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
-    })
+    });
     //Забыли пароль
     builder.addCase(forgotPassword.pending, (state) => {
       state.isLoad = true;
@@ -130,11 +129,17 @@ export const userSlice = createSlice({
       state.error = '';
     });
     builder.addCase(forgotPassword.rejected, (state, action) => {
-      state.error = action.error.message?action.error.message:'';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
-    })
+    });
   }
 });
 
-export const { getUserInfo, isLoadUserInfo, errorUserInfo, isSuccessForgotPassword, isAuthChecked } = userSlice.selectors;
+export const {
+  getUserInfo,
+  isLoadUserInfo,
+  errorUserInfo,
+  isSuccessForgotPassword,
+  isAuthChecked
+} = userSlice.selectors;
 export const { authChecked } = userSlice.actions;

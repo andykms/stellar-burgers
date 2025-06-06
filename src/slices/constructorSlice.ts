@@ -12,11 +12,11 @@ export interface constructorState {
 const initialState: constructorState = {
   ingredients: [],
   price: 0,
-  newOrder: null,
+  newOrder: null
 };
 
 export const constructorSlice = createSlice({
-  name: 'constructor',
+  name: 'constructorSlice',
   initialState,
   selectors: {
     getIngredients: (state) => state.ingredients,
@@ -34,8 +34,9 @@ export const constructorSlice = createSlice({
       );
       state.price -= action.payload.price;
     }
-  },
+  }
 });
 
-export const { getIngredients, getPrice, getNewOrder } = constructorSlice.selectors;
+export const { getIngredients, getPrice, getNewOrder } =
+  constructorSlice.selectors;
 export const { addIngredient, deleteIngredient } = constructorSlice.actions;

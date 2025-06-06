@@ -15,7 +15,7 @@ import {
 } from '@api';
 import { TRegisterData, TLoginData } from '@api';
 import { getCookie, setCookie } from '../utils/cookie';
-import { useDispatch } from '../services/store'
+import { useDispatch } from '../services/store';
 import { authChecked } from '../slices/userSlice';
 
 function setAccessAndRefreshToken(accessToken: string, refreshToken: string) {
@@ -24,32 +24,32 @@ function setAccessAndRefreshToken(accessToken: string, refreshToken: string) {
 }
 
 export const getIngredients = createAsyncThunk(
-  'burger/getIngredients',
+  'getIngredients',
   async () => await getIngredientsApi()
 );
 
 export const getFeeds = createAsyncThunk(
-  'burger/getFeeds',
+  'getFeeds',
   async () => await getFeedsApi()
 );
 
 export const getOrders = createAsyncThunk(
-  'burger/getOrders',
+  'getOrders',
   async () => await getOrdersApi()
 );
 
 export const postOrder = createAsyncThunk(
-  'burger/postOrder',
+  'postOrder',
   async (data: string[]) => await orderBurgerApi(data)
 );
 
 export const getOrderByNumber = createAsyncThunk(
-  'burger/getOrderByNumber',
+  'getOrderByNumber',
   async (number: number) => await getOrderByNumberApi(number)
 );
 
 export const registerUser = createAsyncThunk(
-  'burger/registerUser',
+  'registerUser',
   async (data: TRegisterData) =>
     await registerUserApi(data).then((data) => {
       setAccessAndRefreshToken(data.accessToken, data.refreshToken);
@@ -58,7 +58,7 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-  'burger/loginUser',
+  'loginUser',
   async (data: TLoginData) =>
     await loginUserApi(data).then((data) => {
       setAccessAndRefreshToken(data.accessToken, data.refreshToken);
@@ -67,28 +67,28 @@ export const loginUser = createAsyncThunk(
 );
 
 export const forgotPassword = createAsyncThunk(
-  'burger/forgotPassword',
+  'forgotPassword',
   async (data: { email: string }) => await forgotPasswordApi(data)
 );
 
 export const resetPassword = createAsyncThunk(
-  'burger/resetPassword',
+  'resetPassword',
   async (data: { password: string; token: string }) =>
     await resetPasswordApi(data)
 );
 
 export const getUser = createAsyncThunk(
-  'burger/getUser',
+  'getUser',
   async () => await getUserApi()
 );
 
 export const updateUser = createAsyncThunk(
-  'burger/updateUser',
+  'updateUser',
   async (user: Partial<TRegisterData>) => await updateUserApi(user)
 );
 
 export const logout = createAsyncThunk(
-  'burger/logout',
+  'logout',
   async () =>
     await logoutApi().then(() => {
       localStorage.removeItem('refreshToken');
@@ -96,7 +96,7 @@ export const logout = createAsyncThunk(
     })
 );
 
-export const checkIsAuth = createAsyncThunk('burger/checkIsAuth', async () => {
+export const checkIsAuth = createAsyncThunk('checkIsAuth', async () => {
   const dispatch = useDispatch();
   if (getCookie('accessToken')) {
     dispatch(getUser()).finally(() => {

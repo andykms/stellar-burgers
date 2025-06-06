@@ -1,8 +1,6 @@
-import {TOrder} from '@utils-types';
+import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  getOrders
-} from '../actions/ApiActions';
+import { getOrders } from '../actions/ApiActions';
 
 //Заказы пользователя
 export interface ordersState {
@@ -18,7 +16,7 @@ const initialState: ordersState = {
 };
 
 export const userOrdersSlice = createSlice({
-  name: 'orders',
+  name: 'userOrder',
   initialState,
   reducers: {},
   selectors: {
@@ -33,7 +31,7 @@ export const userOrdersSlice = createSlice({
       state.error = '';
     });
     builder.addCase(getOrders.rejected, (state, action) => {
-      state.error = action.error.message?action.error.message:'';
+      state.error = action.error.message ? action.error.message : '';
       state.isLoad = false;
     });
     builder.addCase(getOrders.pending, (state) => {
@@ -43,4 +41,5 @@ export const userOrdersSlice = createSlice({
   }
 });
 
-export const { getUserOrders, isLoadUserOrders, errorUserOrders } = userOrdersSlice.selectors;
+export const { getUserOrders, isLoadUserOrders, errorUserOrders } =
+  userOrdersSlice.selectors;
