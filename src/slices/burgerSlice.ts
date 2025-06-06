@@ -1,3 +1,4 @@
+/*
 import { TIngredient, TOrder, TOrdersData, TUser } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
 import {
@@ -37,6 +38,4 @@ export interface feedsState {
   isLoad: false;
   error: string;
 }
-
-
-
+*/

@@ -15,8 +15,8 @@ import {
 } from '@api';
 import { TRegisterData, TLoginData } from '@api';
 import { getCookie, setCookie } from '../utils/cookie';
-import { dispatch } from '../services/store';
-import { actions } from '../slices/burgerSlice';
+import { useDispatch } from '../services/store'
+import { authChecked } from '../slices/userSlice';
 
 function setAccessAndRefreshToken(accessToken: string, refreshToken: string) {
   setCookie('accessToken', accessToken);
@@ -97,11 +97,12 @@ export const logout = createAsyncThunk(
 );
 
 export const checkIsAuth = createAsyncThunk('burger/checkIsAuth', async () => {
+  const dispatch = useDispatch();
   if (getCookie('accessToken')) {
     dispatch(getUser()).finally(() => {
-      dispatch(actions.authChecked());
+      dispatch(authChecked());
     });
   } else {
-    dispatch(actions.authChecked());
+    dispatch(authChecked());
   }
 });

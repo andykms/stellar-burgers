@@ -15,11 +15,11 @@ import { Modal } from '@components';
 import { useEffect, useState } from 'react';
 import { OrderInfo } from '@components';
 import { IngredientDetails } from '@components';
-import { dispatch } from '../../services/store';
+import { useDispatch } from '../../services/store';
 import { checkIsAuth } from '../../actions/ApiActions';
 
 function App() {
-
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkIsAuth());
   }, [dispatch]); 

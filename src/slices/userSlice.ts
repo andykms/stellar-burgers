@@ -1,15 +1,9 @@
 import { TIngredient, TOrder, TOrdersData, TUser } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  getIngredients,
-  getFeeds,
-  getOrders,
-  postOrder,
-  getOrderByNumber,
   registerUser,
   loginUser,
   forgotPassword,
-  resetPassword,
   getUser,
   updateUser,
   logout
@@ -22,6 +16,7 @@ export interface userState {
   isLoad: boolean;
   error: string;
   isSuccessForgotPassword: boolean;
+  isAuthChecked: boolean;
 }
 
 const initialState: userState = {
@@ -32,17 +27,23 @@ const initialState: userState = {
   isLoad: false,
   error: '',
   isSuccessForgotPassword: false,
+  isAuthChecked: false,
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    authChecked: (state) => {
+      state.isAuthChecked = true;
+    }
+  },
   selectors: {
-    getUser: (state) => state.user,
-    isLoad: (state) => state.isLoad,
-    error: (state) => state.error,
-    isSuccessForgotPassword: (state) => state.isSuccessForgotPassword
+    getUserInfo: (state) => state.user,
+    isLoadUserInfo: (state) => state.isLoad,
+    errorUserInfo: (state) => state.error,
+    isSuccessForgotPassword: (state) => state.isSuccessForgotPassword,
+    isAuthChecked: (state) => state.isAuthChecked
   },
   extraReducers: (builder) =>{
     //Получили пользователя по accessToken
@@ -134,3 +135,6 @@ export const userSlice = createSlice({
     })
   }
 });
+
+export const { getUserInfo, isLoadUserInfo, errorUserInfo, isSuccessForgotPassword, isAuthChecked } = userSlice.selectors;
+export const { authChecked } = userSlice.actions;

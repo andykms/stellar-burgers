@@ -1,6 +1,5 @@
 import { TIngredient, TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { postOrder } from 'src/actions/ApiActions';
 import { get } from 'http';
 
 //Конструктор
@@ -36,11 +35,7 @@ export const constructorSlice = createSlice({
       state.price -= action.payload.price;
     }
   },
-  extraReducers: (builder) => {
-    builder.addCase(postOrder.fulfilled, (state, action) => {
-      state.newOrder = action.payload.order;
-    })
-  }
 });
 
+export const { getIngredients, getPrice, getNewOrder } = constructorSlice.selectors;
 export const { addIngredient, deleteIngredient } = constructorSlice.actions;

@@ -17,14 +17,14 @@ const initialState: ordersState = {
   error: ''
 };
 
-export const ordersSlice = createSlice({
+export const userOrdersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {},
   selectors: {
-    getOrders: (state) => state.orders,
-    isLoad: (state) => state.isLoad,
-    error: (state) => state.error
+    getUserOrders: (state) => state.orders,
+    isLoadUserOrders: (state) => state.isLoad,
+    errorUserOrders: (state) => state.error
   },
   extraReducers: (builder) => {
     builder.addCase(getOrders.fulfilled, (state, action) => {
@@ -42,3 +42,5 @@ export const ordersSlice = createSlice({
     });
   }
 });
+
+export const { getUserOrders, isLoadUserOrders, errorUserOrders } = userOrdersSlice.selectors;

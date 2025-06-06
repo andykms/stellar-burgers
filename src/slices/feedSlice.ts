@@ -27,11 +27,11 @@ export const feedSlice = createSlice({
   initialState,
   reducers: {},
   selectors: {
-    getFeeds: (state) => state.feeds,
+    getFeedsList: (state) => state.feeds,
     getTotal: (state) => state.total,
     getTotalToday: (state) => state.totalToday,
-    isLoad: (state) => state.isLoad,
-    error: (state) => state.error
+    isLoadFeed: (state) => state.isLoad,
+    errorFeed: (state) => state.error
   },
   extraReducers: (builder) => {
     builder.addCase(getFeeds.fulfilled, (state, action) => {
@@ -51,3 +51,5 @@ export const feedSlice = createSlice({
     });
   }
 });
+
+export const { getFeedsList, getTotal, getTotalToday, isLoadFeed, errorFeed } = feedSlice.selectors;
