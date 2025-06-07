@@ -13,10 +13,6 @@ import { getIngredients } from '../../actions/ApiActions';
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
 
   const isIngredientsLoading = useSelector<boolean>(isLoadIngredients);
   return (
