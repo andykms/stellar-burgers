@@ -16,10 +16,9 @@ export const Register: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(registerUser({ name: userName, email, password }))
-    .then(()=>{
-      navigate('/profile', {replace: true});
-    })
+    dispatch(registerUser({ name: userName, email, password })).then(() => {
+      navigate('/profile', { replace: true });
+    });
   };
 
   return (

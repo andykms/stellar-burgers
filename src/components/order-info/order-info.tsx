@@ -9,7 +9,6 @@ import { getIngredientsList } from '../../slices/ingredientsSlice';
 import { useEffect } from 'react';
 import { getOrderByNumber } from '../../actions/ApiActions';
 
-
 export const OrderInfo: FC = () => {
   const { number } = useParams();
   const dispatch = useDispatch();

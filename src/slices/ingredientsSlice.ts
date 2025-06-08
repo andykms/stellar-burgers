@@ -41,8 +41,5 @@ export const ingredientsSlice = createSlice({
   }
 });
 
-export const {
-  getIngredientsList,
-  getIsLoadIngredients,
-  getErrorIngredients
-} = ingredientsSlice.selectors;
+export const { getIngredientsList, getIsLoadIngredients, getErrorIngredients } =
+  ingredientsSlice.selectors;

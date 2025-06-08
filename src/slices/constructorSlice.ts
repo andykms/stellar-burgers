@@ -73,10 +73,12 @@ export const constructorSlice = createSlice({
   }
 });
 
+export const { getConstructorIngredients, getNewOrder, getConstructorBread } =
+  constructorSlice.selectors;
 export const {
-  getConstructorIngredients,
-  getNewOrder,
-  getConstructorBread
-} = constructorSlice.selectors;
-export const { addIngredient, deleteIngredient, upIngredient, downIngredient, clearConstructor } =
-  constructorSlice.actions;
+  addIngredient,
+  deleteIngredient,
+  upIngredient,
+  downIngredient,
+  clearConstructor
+} = constructorSlice.actions;

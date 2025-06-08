@@ -12,7 +12,7 @@ import { Profile } from '@pages';
 import { ProfileOrders } from '@pages';
 import { NotFound404 } from '@pages';
 import { Modal } from '@components';
-import { useEffect,} from 'react';
+import { useEffect } from 'react';
 import { OrderInfo } from '@components';
 import { IngredientDetails } from '@components';
 import { useDispatch } from '../../services/store';
@@ -59,17 +59,16 @@ function App() {
               <Feed />
             </div>
           }
-        >
-        </Route>
+        />
         <Route
-            path={'/feed/:number'}
-            element={
-              <div className={styles.app}>
-                <AppHeader />
-                <OrderInfo />
-              </div>
-            }
-          />
+          path={'/feed/:number'}
+          element={
+            <div className={styles.app}>
+              <AppHeader />
+              <OrderInfo />
+            </div>
+          }
+        />
         <Route
           path={'/login'}
           element={
@@ -152,16 +151,18 @@ function App() {
       </Routes>
 
       {/*Модальное окно для просмотра заказа*/}
-      { backgroundLocation && <Routes>
-        <Route
-          path={'/feed/:number'}
-          element={
-            <Modal title='' onClose={onCloseModal}>
-              <OrderInfo />
-            </Modal>
-          }
-        />
-      </Routes>}
+      {backgroundLocation && (
+        <Routes>
+          <Route
+            path={'/feed/:number'}
+            element={
+              <Modal title='' onClose={onCloseModal}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
 
       {/*Модальное окно для просмотра ингредиента*/}
       {backgroundLocation && (
@@ -177,18 +178,20 @@ function App() {
         </Routes>
       )}
 
-      {backgroundLocation && <Routes>
-        <Route
-          path={'/profile/orders/:number'}
-          element={
-            <ProtectedRoute>
-              <Modal title='' onClose={onCloseModal}>
-                <OrderInfo />
-              </Modal>
-            </ProtectedRoute>
-          }
-        />
-      </Routes>}
+      {backgroundLocation && (
+        <Routes>
+          <Route
+            path={'/profile/orders/:number'}
+            element={
+              <ProtectedRoute>
+                <Modal title='' onClose={onCloseModal}>
+                  <OrderInfo />
+                </Modal>
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      )}
     </>
   );
 }

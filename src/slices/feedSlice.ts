@@ -9,7 +9,7 @@ export interface feedState {
   totalToday: number;
   isLoad: boolean;
   error: string;
-  currentOrder: TOrder|null;
+  currentOrder: TOrder | null;
 }
 
 const initialState: feedState = {
@@ -18,7 +18,7 @@ const initialState: feedState = {
   totalToday: 0,
   isLoad: false,
   error: '',
-  currentOrder: null,
+  currentOrder: null
 };
 
 export const feedSlice = createSlice({
@@ -62,5 +62,11 @@ export const feedSlice = createSlice({
   }
 });
 
-export const { getFeedsList, getTotal, getTotalToday, getIsLoadFeed, getErrorFeed, getCurrentOrder } =
-  feedSlice.selectors;
+export const {
+  getFeedsList,
+  getTotal,
+  getTotalToday,
+  getIsLoadFeed,
+  getErrorFeed,
+  getCurrentOrder
+} = feedSlice.selectors;

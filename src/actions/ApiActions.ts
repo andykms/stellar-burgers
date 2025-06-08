@@ -89,7 +89,7 @@ export const updateUser = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   'logout',
-  async (_,{dispatch}) =>
+  async (_, { dispatch }) =>
     await logoutApi().then(() => {
       localStorage.removeItem('refreshToken');
       setCookie('accessToken', '', { expires: -1 });

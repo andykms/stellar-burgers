@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { getErrorLogin } from '../../slices/userSlice';
 import { useSelector } from '../../services/store';
 
-
 export const Login: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,9 +16,8 @@ export const Login: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }))
-    .then(() => {
-      navigate('/profile', {replace: true});
+    dispatch(loginUser({ email, password })).then(() => {
+      navigate('/profile', { replace: true });
     });
   };
 

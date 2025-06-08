@@ -55,10 +55,10 @@ export const orderSlice = createSlice({
   }
 });
 
-export const { addIngredientIdToOrder, deleteIngredientIdFromOrder, clearSuccessOrder } =
-  orderSlice.actions;
 export const {
-  getIsLoadOrder,
-  getErrorOrder,
-  getSuccessOrder
-} = orderSlice.selectors;
+  addIngredientIdToOrder,
+  deleteIngredientIdFromOrder,
+  clearSuccessOrder
+} = orderSlice.actions;
+export const { getIsLoadOrder, getErrorOrder, getSuccessOrder } =
+  orderSlice.selectors;

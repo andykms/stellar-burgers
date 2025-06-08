@@ -19,7 +19,7 @@ export const ProtectedRoute = ({ children }: ProtecedRouteProps) => {
   }
 
   if (!userInfo.email || !userInfo.name) {
-    return <Navigate to='/login' replace={true}/>;
+    return <Navigate to='/login' replace />;
   }
 
   return <>{children}</>;
