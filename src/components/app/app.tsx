@@ -21,6 +21,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getIngredients } from '../../actions/ApiActions';
 import { getOrders } from '../../actions/ApiActions';
+import { ProdectedUnauthRoute } from '../ProtectedUnauthRoute/ProtectedAuthRoute';
 
 function App() {
   const dispatch = useDispatch();
@@ -73,8 +74,10 @@ function App() {
           path={'/login'}
           element={
             <div className={styles.app}>
-              <AppHeader />
-              <Login />
+              <ProdectedUnauthRoute>
+                <AppHeader />
+                <Login />
+              </ProdectedUnauthRoute>
             </div>
           }
         />
@@ -82,8 +85,10 @@ function App() {
           path={'/register'}
           element={
             <div className={styles.app}>
-              <AppHeader />
-              <Register />
+              <ProdectedUnauthRoute>
+                <AppHeader />
+                <Register />
+              </ProdectedUnauthRoute>
             </div>
           }
         />
@@ -91,8 +96,10 @@ function App() {
           path={'/forgot-password'}
           element={
             <div className={styles.app}>
-              <AppHeader />
-              <ForgotPassword />
+              <ProdectedUnauthRoute>
+                <AppHeader />
+                <ForgotPassword />
+              </ProdectedUnauthRoute>
             </div>
           }
         />
@@ -100,8 +107,10 @@ function App() {
           path={'/reset-password'}
           element={
             <div className={styles.app}>
-              <AppHeader />
-              <ResetPassword />
+              <ProdectedUnauthRoute>
+                <AppHeader />
+                <ResetPassword />
+              </ProdectedUnauthRoute>
             </div>
           }
         />
