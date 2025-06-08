@@ -54,7 +54,8 @@ export const userSlice = createSlice({
     getErrorLogin: (state) => state.errorLogin,
     getErrorRegister: (state) => state.errorRegister,
     getErrorForgot: (state) => state.errorForgot,
-    getIsChekedAuth: (state) => state.isChekedAuth
+    getIsChekedAuth: (state) => state.isChekedAuth,
+    getIsAuth: (state) => state.user.name && state.user.email
   },
   extraReducers: (builder) => {
     //Получили пользователя по accessToken
@@ -131,7 +132,8 @@ export const {
   getErrorLogin,
   getErrorRegister,
   getErrorForgot,
-  getIsChekedAuth
+  getIsChekedAuth,
+  getIsAuth
 } = userSlice.selectors;
 
 export const { checkAuthTrue, clearUserInfo } = userSlice.actions;
