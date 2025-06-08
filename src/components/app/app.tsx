@@ -29,6 +29,7 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(checkIsAuth());
+    dispatch(getFeeds());
   }, [dispatch]);
 
   const navigate = useNavigate();
@@ -60,8 +61,9 @@ function App() {
             </div>
           }
         >
-          <Route
-            path={':number'}
+        </Route>
+        <Route
+            path={'/feed/:number'}
             element={
               <div className={styles.app}>
                 <AppHeader />
@@ -69,7 +71,6 @@ function App() {
               </div>
             }
           />
-        </Route>
         <Route
           path={'/login'}
           element={
@@ -156,7 +157,7 @@ function App() {
       </Routes>
 
       {/*Модальное окно для просмотра заказа*/}
-      <Routes>
+      { backgroundLocation && <Routes>
         <Route
           path={'/feed/:number'}
           element={
@@ -165,7 +166,7 @@ function App() {
             </Modal>
           }
         />
-      </Routes>
+      </Routes>}
 
       {/*Модальное окно для просмотра ингредиента*/}
       {backgroundLocation && (
@@ -181,7 +182,7 @@ function App() {
         </Routes>
       )}
 
-      <Routes>
+      {backgroundLocation && <Routes>
         <Route
           path={'/profile/orders/:number'}
           element={
@@ -192,7 +193,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-      </Routes>
+      </Routes>}
     </>
   );
 }

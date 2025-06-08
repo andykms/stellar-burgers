@@ -1,6 +1,6 @@
 import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getFeeds } from '../actions/ApiActions';
+import { getFeeds, getOrderByNumber } from '../actions/ApiActions';
 
 //Лента заказов
 export interface feedState {
@@ -8,7 +8,9 @@ export interface feedState {
   total: number;
   totalToday: number;
   isLoad: boolean;
+  isLoadCurrentOrder: boolean;
   error: string;
+  currentOrder: TOrder|null;
 }
 
 const initialState: feedState = {
@@ -16,7 +18,9 @@ const initialState: feedState = {
   total: 0,
   totalToday: 0,
   isLoad: false,
-  error: ''
+  error: '',
+  currentOrder: null,
+  isLoadCurrentOrder: false
 };
 
 export const feedSlice = createSlice({
@@ -28,9 +32,24 @@ export const feedSlice = createSlice({
     getTotal: (state) => state.total,
     getTotalToday: (state) => state.totalToday,
     isLoadFeed: (state) => state.isLoad,
-    errorFeed: (state) => state.error
+    isLoadCurrentOrder: (state) => state.isLoadCurrentOrder,
+    errorFeed: (state) => state.error,
+    getCurrentOrder: (state) => state.currentOrder
   },
   extraReducers: (builder) => {
+    builder.addCase(getOrderByNumber.pending, (state) => {
+      state.isLoadCurrentOrder = true;
+      state.error = '';
+    });
+    builder.addCase(getOrderByNumber.fulfilled, (state, action) => {
+      state.currentOrder = action.payload.orders[0];
+      state.isLoadCurrentOrder = false;
+      state.error = '';
+    });
+    builder.addCase(getOrderByNumber.rejected, (state, action) => {
+      state.error = action.error.message ? action.error.message : '';
+      state.isLoadCurrentOrder = false;
+    });
     builder.addCase(getFeeds.fulfilled, (state, action) => {
       state.feeds = action.payload.orders;
       state.total = action.payload.total;
@@ -49,5 +68,5 @@ export const feedSlice = createSlice({
   }
 });
 
-export const { getFeedsList, getTotal, getTotalToday, isLoadFeed, errorFeed } =
+export const { getFeedsList, getTotal, getTotalToday, isLoadFeed, errorFeed, getCurrentOrder, isLoadCurrentOrder } =
   feedSlice.selectors;
