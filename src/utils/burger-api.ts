@@ -3,7 +3,6 @@ import { TIngredient, TOrder, TOrdersData, TUser } from './types';
 // Загрузка переменных среды из файла .env
 
 const URL = process.env.BURGER_API_URL;
-console.log('URL', URL);
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
