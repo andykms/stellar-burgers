@@ -32,7 +32,7 @@ export const BurgerConstructor: FC = () => {
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
     if (!userInfo.email || !userInfo.name) {
-      navigate('/login');
+      navigate('/login', {replace: true});
       return;
     }
     dispatch(

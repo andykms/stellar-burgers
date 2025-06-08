@@ -9,7 +9,7 @@ export const ResetPassword: FC = () => {
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
   const [error, setError] = useState<Error | null>(null);
-
+  
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     setError(null);

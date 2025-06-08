@@ -19,7 +19,7 @@ export const Login: FC = () => {
     e.preventDefault();
     dispatch(loginUser({ email, password }))
     .then(() => {
-      navigate('/profile');
+      navigate('/profile', {replace: true});
     });
   };
 

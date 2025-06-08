@@ -1,4 +1,4 @@
-import { TIngredient, TOrder, TOrdersData, TUser } from '@utils-types';
+import { TUser } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
 import {
   registerUser,
@@ -41,6 +41,13 @@ export const userSlice = createSlice({
   reducers: {
     checkAuthTrue: (state) => {
       state.isChekedAuth = true;
+    },
+    clearUserInfo: (state) => {
+      state.user = {
+        name: '',
+        email: ''
+      };
+      state.isLoad = false;
     }
   },
   selectors: {
@@ -103,17 +110,6 @@ export const userSlice = createSlice({
       state.errorRegister = action.error.message ? action.error.message : '';
       state.isLoad = false;
     });
-    //Вышли из аккаунта
-    builder.addCase(logout.pending, (state) => {
-      state.isLoad = true;
-    });
-    builder.addCase(logout.fulfilled, (state, action) => {
-      state.user = {
-        name: '',
-        email: ''
-      };
-      state.isLoad = false;
-    });
     builder.addCase(logout.rejected, (state, action) => {
       state.isLoad = false;
     });
@@ -143,4 +139,4 @@ export const {
   isChekedAuth
 } = userSlice.selectors;
 
-export const { checkAuthTrue } = userSlice.actions;
+export const { checkAuthTrue, clearUserInfo } = userSlice.actions;

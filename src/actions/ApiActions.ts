@@ -13,11 +13,10 @@ import {
   updateUserApi,
   logoutApi
 } from '@api';
+import { clearUserInfo } from '../slices/userSlice';
 import { TRegisterData, TLoginData } from '@api';
 import { getCookie, setCookie } from '../utils/cookie';
-import { useDispatch } from '../services/store';
 import { checkAuthTrue } from '../slices/userSlice';
-import { useEffect } from 'react';
 
 function setAccessAndRefreshToken(accessToken: string, refreshToken: string) {
   setCookie('accessToken', accessToken);
@@ -90,10 +89,11 @@ export const updateUser = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   'logout',
-  async () =>
+  async (_,{dispatch}) =>
     await logoutApi().then(() => {
       localStorage.removeItem('refreshToken');
       setCookie('accessToken', '', { expires: -1 });
+      dispatch(clearUserInfo());
     })
 );
 

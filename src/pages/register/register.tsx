@@ -18,7 +18,7 @@ export const Register: FC = () => {
     e.preventDefault();
     dispatch(registerUser({ name: userName, email, password }))
     .then(()=>{
-      navigate('/profile');
+      navigate('/profile', {replace: true});
     })
   };
 

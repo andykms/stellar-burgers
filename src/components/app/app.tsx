@@ -30,6 +30,7 @@ function App() {
     dispatch(getIngredients());
     dispatch(checkIsAuth());
     dispatch(getFeeds());
+    dispatch(getOrders());
   }, [dispatch]);
 
   const navigate = useNavigate();
@@ -94,9 +95,7 @@ function App() {
           element={
             <div className={styles.app}>
               <AppHeader />
-              <ProtectedRoute>
-                <ForgotPassword />
-              </ProtectedRoute>
+              <ForgotPassword />
             </div>
           }
         />
@@ -105,9 +104,7 @@ function App() {
           element={
             <div className={styles.app}>
               <AppHeader />
-              <ProtectedRoute>
-                <ResetPassword />
-              </ProtectedRoute>
+              <ResetPassword />
             </div>
           }
         />
