@@ -5,7 +5,6 @@ import { FC } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
 import { getFeedsList } from '../../slices/feedSlice';
 import { getFeeds } from '../../actions/ApiActions';
-import { useEffect } from 'react';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */

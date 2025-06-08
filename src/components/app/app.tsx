@@ -12,7 +12,7 @@ import { Profile } from '@pages';
 import { ProfileOrders } from '@pages';
 import { NotFound404 } from '@pages';
 import { Modal } from '@components';
-import { useEffect, useState } from 'react';
+import { useEffect,} from 'react';
 import { OrderInfo } from '@components';
 import { IngredientDetails } from '@components';
 import { useDispatch } from '../../services/store';
@@ -20,8 +20,6 @@ import { checkIsAuth, getFeeds } from '../../actions/ApiActions';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getIngredients } from '../../actions/ApiActions';
-import { useSelector } from '../../services/store';
-import { getIngredientsList } from '../../slices/ingredientsSlice';
 import { getOrders } from '../../actions/ApiActions';
 
 function App() {

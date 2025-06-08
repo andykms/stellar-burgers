@@ -4,7 +4,6 @@ import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useSelector } from 'react-redux';
 import { getIngredientsList } from '../../slices/ingredientsSlice';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from '../../services/store';
 
 export const IngredientDetails: FC = () => {
   /** TODO: взять переменную из стора */
