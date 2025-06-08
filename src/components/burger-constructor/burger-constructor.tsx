@@ -42,7 +42,6 @@ export const BurgerConstructor: FC = () => {
   };
 
   const closeOrderModal = () => {
-    navigate('/feed');
     dispatch(clearSuccessOrder());
   };
 
