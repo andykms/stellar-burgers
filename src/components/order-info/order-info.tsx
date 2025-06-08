@@ -8,7 +8,6 @@ import { getCurrentOrder } from '../../slices/feedSlice';
 import { getIngredientsList } from '../../slices/ingredientsSlice';
 import { useEffect } from 'react';
 import { getOrderByNumber } from '../../actions/ApiActions';
-import { isLoadCurrentOrder } from '../../slices/feedSlice';
 
 
 export const OrderInfo: FC = () => {

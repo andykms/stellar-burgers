@@ -20,8 +20,8 @@ export const orderSlice = createSlice({
   name: 'order',
   initialState,
   selectors: {
-    isLoadOrder: (state) => state.isLoad,
-    errorOrder: (state) => state.error,
+    getIsLoadOrder: (state) => state.isLoad,
+    getErrorOrder: (state) => state.error,
     getSuccessOrder: (state) => state.successOrder
   },
   reducers: {
@@ -58,7 +58,7 @@ export const orderSlice = createSlice({
 export const { addIngredientIdToOrder, deleteIngredientIdFromOrder, clearSuccessOrder } =
   orderSlice.actions;
 export const {
-  isLoadOrder,
-  errorOrder,
+  getIsLoadOrder,
+  getErrorOrder,
   getSuccessOrder
 } = orderSlice.selectors;

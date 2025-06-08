@@ -17,7 +17,6 @@ export interface userState {
   errorRegister: string;
   errorForgot: string;
   errorUpdate: string;
-  isSuccessForgotPassword: boolean;
   isChekedAuth: boolean;
 }
 
@@ -31,7 +30,6 @@ const initialState: userState = {
   errorRegister: '',
   errorForgot: '',
   errorUpdate: '',
-  isSuccessForgotPassword: false,
   isChekedAuth: false
 };
 
@@ -52,12 +50,11 @@ export const userSlice = createSlice({
   },
   selectors: {
     getUserInfo: (state) => state.user,
-    isLoadUserInfo: (state) => state.isLoad,
-    errorLogin: (state) => state.errorLogin,
-    errorRegister: (state) => state.errorRegister,
-    errorForgot: (state) => state.errorForgot,
-    isSuccessForgotPassword: (state) => state.isSuccessForgotPassword,
-    isChekedAuth: (state) => state.isChekedAuth
+    getIsLoadUserInfo: (state) => state.isLoad,
+    getErrorLogin: (state) => state.errorLogin,
+    getErrorRegister: (state) => state.errorRegister,
+    getErrorForgot: (state) => state.errorForgot,
+    getIsChekedAuth: (state) => state.isChekedAuth
   },
   extraReducers: (builder) => {
     //Получили пользователя по accessToken
@@ -118,7 +115,6 @@ export const userSlice = createSlice({
       state.isLoad = true;
     });
     builder.addCase(forgotPassword.fulfilled, (state, action) => {
-      state.isSuccessForgotPassword = action.payload.success;
       state.isLoad = false;
       state.errorForgot = '';
     });
@@ -131,12 +127,11 @@ export const userSlice = createSlice({
 
 export const {
   getUserInfo,
-  isLoadUserInfo,
-  errorLogin,
-  errorRegister,
-  errorForgot,
-  isSuccessForgotPassword,
-  isChekedAuth
+  getIsLoadUserInfo,
+  getErrorLogin,
+  getErrorRegister,
+  getErrorForgot,
+  getIsChekedAuth
 } = userSlice.selectors;
 
 export const { checkAuthTrue, clearUserInfo } = userSlice.actions;

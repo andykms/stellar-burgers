@@ -6,12 +6,11 @@ import {
   getConstructorIngredients,
   getConstructorBread
 } from '../../slices/constructorSlice';
-import { isLoadOrder } from '../../slices/orderSlice';
+import { getIsLoadOrder } from '../../slices/orderSlice';
 import { getSuccessOrder } from '../../slices/orderSlice';
 import { postOrder } from '../../actions/ApiActions';
 import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from '../../slices/userSlice';
-import { Navigate } from 'react-router-dom';
 import { packOrder } from '../../utils/packOrder';
 import { clearSuccessOrder } from '../../slices/orderSlice';
 import { clearConstructor } from '../../slices/constructorSlice';
@@ -25,7 +24,7 @@ export const BurgerConstructor: FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const orderRequest = useSelector(isLoadOrder);
+  const orderRequest = useSelector(getIsLoadOrder);
   const orderModalData = useSelector(getSuccessOrder);
   const userInfo = useSelector(getUserInfo);
 

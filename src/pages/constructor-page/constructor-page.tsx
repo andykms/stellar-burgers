@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from '../../services/store';
+import { useSelector } from '../../services/store';
 
 import styles from './constructor-page.module.css';
 
@@ -6,14 +6,12 @@ import { BurgerIngredients } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
-import { isLoadIngredients } from '../../slices/ingredientsSlice';
-import { useEffect } from 'react';
-import { getIngredients } from '../../actions/ApiActions';
+import { getIsLoadIngredients } from '../../slices/ingredientsSlice';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
 
-  const isIngredientsLoading = useSelector<boolean>(isLoadIngredients);
+  const isIngredientsLoading = useSelector<boolean>(getIsLoadIngredients);
   return (
     <>
       {isIngredientsLoading ? (
