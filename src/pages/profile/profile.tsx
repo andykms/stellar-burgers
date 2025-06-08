@@ -17,11 +17,19 @@ export const Profile: FC = () => {
   });
 
   useEffect(() => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      name: user?.name || '',
-      email: user?.email || ''
-    }));
+    let isMounted = true;
+
+    if (isMounted) {
+      setFormValue((prevState) => ({
+        ...prevState,
+        name: user?.name || '',
+        email: user?.email || ''
+      }));
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [user]);
 
   const isFormChanged =
