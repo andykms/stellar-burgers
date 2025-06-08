@@ -16,19 +16,21 @@ import { useEffect, useState } from 'react';
 import { OrderInfo } from '@components';
 import { IngredientDetails } from '@components';
 import { useDispatch } from '../../services/store';
-import { checkIsAuth } from '../../actions/ApiActions';
+import { checkIsAuth, getFeeds } from '../../actions/ApiActions';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getIngredients } from '../../actions/ApiActions';
 import { useSelector } from '../../services/store';
 import { getIngredientsList } from '../../slices/ingredientsSlice';
+import { getOrders } from '../../actions/ApiActions';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(checkIsAuth());
     dispatch(getIngredients());
-  }, []);
+    dispatch(checkIsAuth());
+  }, [dispatch]);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,7 +41,7 @@ function App() {
   };
   return (
     <>
-      <Routes location={backgroundLocation||location}>
+      <Routes location={backgroundLocation || location}>
         <Route
           path={'/'}
           element={
@@ -49,98 +51,111 @@ function App() {
             </div>
           }
         />
-        <Route path={'/feed'} element={<Feed />}/>
+        <Route
+          path={'/feed'}
+          element={
+            <div className={styles.app}>
+              <AppHeader />
+              <Feed />
+            </div>
+          }
+        >
+          <Route
+            path={':number'}
+            element={
+              <div className={styles.app}>
+                <AppHeader />
+                <OrderInfo />
+              </div>
+            }
+          />
+        </Route>
         <Route
           path={'/login'}
           element={
-            <ProtectedRoute>
+            <div className={styles.app}>
+              <AppHeader />
               <Login />
-            </ProtectedRoute>
+            </div>
           }
         />
         <Route
           path={'/register'}
           element={
-            <ProtectedRoute>
+            <div className={styles.app}>
+              <AppHeader />
               <Register />
-            </ProtectedRoute>
+            </div>
           }
         />
         <Route
           path={'/forgot-password'}
           element={
-            <ProtectedRoute>
-              <ForgotPassword />
-            </ProtectedRoute>
+            <div className={styles.app}>
+              <AppHeader />
+              <ProtectedRoute>
+                <ForgotPassword />
+              </ProtectedRoute>
+            </div>
           }
         />
         <Route
           path={'/reset-password'}
           element={
-            <ProtectedRoute>
-              <ResetPassword />
-            </ProtectedRoute>
+            <div className={styles.app}>
+              <AppHeader />
+              <ProtectedRoute>
+                <ResetPassword />
+              </ProtectedRoute>
+            </div>
           }
         />
         <Route
           path={'/profile'}
           element={
             <ProtectedRoute>
-              <Profile />
+              <div className={styles.app}>
+                <AppHeader />
+                <Profile />
+              </div>
             </ProtectedRoute>
           }
         />
         <Route
           path={'/profile/orders'}
           element={
-            <ProtectedRoute>
-              <ProfileOrders />
-            </ProtectedRoute>
-          }
-        >
-        </Route>
-        <Route
-          path={'/feed/:number'}
-          element={
-          <>
-            <AppHeader />
-            <OrderInfo />
-          </>
+            <div className={styles.app}>
+              <AppHeader />
+              <ProtectedRoute>
+                <ProfileOrders />
+              </ProtectedRoute>
+            </div>
           }
         />
         <Route
           path={'/ingredients/:id'}
           element={
-          <>
-            <AppHeader />
-            <IngredientDetails />
-          </>
+            <div className={styles.app}>
+              <AppHeader />
+              <IngredientDetails />
+            </div>
           }
         />
         <Route
-          path={'/ingredients/:id'}
+          path={'/profile/orders/:number'}
           element={
-          <>
-            <AppHeader />
-            <IngredientDetails />
-          </>
-          }
-        />
-        <Route
-            path={'/profile/orders/:number'}
-            element={
-            <>
+            <div className={styles.app}>
               <AppHeader />
               <ProtectedRoute>
                 <OrderInfo />
               </ProtectedRoute>
-            </>
-            }
-          />
+            </div>
+          }
+        />
         <Route path={'*'} element={<NotFound404 />} />
       </Routes>
 
-     {/*Модальное окно для просмотра заказа*/}
+      {/*Модальное окно для просмотра заказа*/}
       <Routes>
         <Route
           path={'/feed/:number'}
@@ -153,28 +168,30 @@ function App() {
       </Routes>
 
       {/*Модальное окно для просмотра ингредиента*/}
-      {backgroundLocation && <Routes>
-        <Route
-          path={'/ingredients/:id'}
-          element={
-            <Modal title='' onClose={onCloseModal}>
-              <IngredientDetails />
-            </Modal>
-          }
-        />
-      </Routes>}
+      {backgroundLocation && (
+        <Routes>
+          <Route
+            path={'/ingredients/:id'}
+            element={
+              <Modal title='' onClose={onCloseModal}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
 
       <Routes>
         <Route
-            path={'/profile/orders/:number'}
-            element={
-              <ProtectedRoute>
-                <Modal title='' onClose={onCloseModal}>
-                  <OrderInfo />
-                </Modal>
-              </ProtectedRoute>
-            }
-          />
+          path={'/profile/orders/:number'}
+          element={
+            <ProtectedRoute>
+              <Modal title='' onClose={onCloseModal}>
+                <OrderInfo />
+              </Modal>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );

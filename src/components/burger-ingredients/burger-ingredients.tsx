@@ -6,9 +6,7 @@ import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 import { getIngredients } from '../../actions/ApiActions';
 import { useDispatch } from '../../services/store';
 import { useSelector } from '../../services/store';
-import {
-  getIngredientsList
-} from '../../slices/ingredientsSlice';
+import { getIngredientsList } from '../../slices/ingredientsSlice';
 import { TIngredient } from '@utils-types';
 
 export const BurgerIngredients: FC = () => {
@@ -17,7 +15,9 @@ export const BurgerIngredients: FC = () => {
   const ingredients = useSelector<TIngredient[]>(getIngredientsList);
   const buns = ingredients.filter((ingredient) => ingredient.type === 'bun');
   const mains = ingredients.filter((ingredient) => ingredient.type === 'main');
-  const sauces = ingredients.filter((ingredient) => ingredient.type === 'sauce');
+  const sauces = ingredients.filter(
+    (ingredient) => ingredient.type === 'sauce'
+  );
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);

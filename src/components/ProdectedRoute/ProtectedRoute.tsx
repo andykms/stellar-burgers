@@ -1,22 +1,24 @@
-import { useSelector } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
 import { Preloader } from '@ui';
 import { Navigate } from 'react-router-dom';
-import { isAuthChecked } from '../../slices/userSlice';
+import { isLoadUserInfo, isChekedAuth } from '../../slices/userSlice';
 import { getUserInfo } from '../../slices/userSlice';
+import { checkIsAuth } from '../../actions/ApiActions';
+import { useEffect } from 'react';
 
 export interface ProtecedRouteProps {
   children: React.ReactNode;
 }
 
 export const ProtectedRoute = ({ children }: ProtecedRouteProps) => {
-  const isAuthCkecked = useSelector(isAuthChecked);
+  const isCheked = useSelector(isChekedAuth);
   const userInfo = useSelector(getUserInfo);
 
-  if (!isAuthCkecked) {
+  if (!isCheked) {
     return <Preloader />;
   }
 
-  if (!userInfo) {
+  if (!userInfo.email || !userInfo.name) {
     return <Navigate to='/login' />;
   }
 

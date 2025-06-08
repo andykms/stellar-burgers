@@ -16,7 +16,8 @@ import {
 import { TRegisterData, TLoginData } from '@api';
 import { getCookie, setCookie } from '../utils/cookie';
 import { useDispatch } from '../services/store';
-import { authChecked } from '../slices/userSlice';
+import { checkAuthTrue } from '../slices/userSlice';
+import { useEffect } from 'react';
 
 function setAccessAndRefreshToken(accessToken: string, refreshToken: string) {
   setCookie('accessToken', accessToken);
@@ -96,13 +97,15 @@ export const logout = createAsyncThunk(
     })
 );
 
-export const checkIsAuth = createAsyncThunk('checkIsAuth', async () => {
-  const dispatch = useDispatch();
-  if (getCookie('accessToken')) {
-    dispatch(getUser()).finally(() => {
-      dispatch(authChecked());
-    });
-  } else {
-    dispatch(authChecked());
+export const checkIsAuth = createAsyncThunk(
+  'checkIsAuth',
+  async (_, { dispatch }) => {
+    if (getCookie('accessToken')) {
+      dispatch(getUser()).finally(() => {
+        dispatch(checkAuthTrue());
+      });
+    } else {
+      dispatch(checkAuthTrue());
+    }
   }
-});
+);

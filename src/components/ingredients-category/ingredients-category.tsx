@@ -3,7 +3,10 @@ import { TIngredientsCategoryProps } from './type';
 import { TIngredient } from '@utils-types';
 import { IngredientsCategoryUI } from '../ui/ingredients-category';
 import { useSelector } from '../../services/store';
-import { getConstructorBread, getConstructorIngredients } from '../../slices/constructorSlice';
+import {
+  getConstructorBread,
+  getConstructorIngredients
+} from '../../slices/constructorSlice';
 
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
@@ -12,9 +15,9 @@ export const IngredientsCategory = forwardRef<
   /** TODO: взять переменную из стора */
   const burgerConstructor = {
     bun: {
-      _id: useSelector(getConstructorBread)?._id || '',
+      _id: useSelector(getConstructorBread)?._id || ''
     },
-    ingredients: useSelector(getConstructorIngredients),
+    ingredients: useSelector(getConstructorIngredients)
   };
 
   const ingredientsCounters = useMemo(() => {

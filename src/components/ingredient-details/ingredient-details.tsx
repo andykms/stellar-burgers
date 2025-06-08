@@ -8,8 +8,10 @@ import { useDispatch } from '../../services/store';
 
 export const IngredientDetails: FC = () => {
   /** TODO: взять переменную из стора */
-  const {id} = useParams();
-  const ingredientData = useSelector(getIngredientsList).find(item => item._id === id);
+  const { id } = useParams();
+  const ingredientData = useSelector(getIngredientsList).find(
+    (item) => item._id === id
+  );
 
   if (!ingredientData) {
     return <Preloader />;

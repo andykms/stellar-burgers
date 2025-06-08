@@ -2,29 +2,50 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useSelector, useDispatch } from '../../services/store';
-import { getConstructorIngredients, getConstructorPrice, getConstructorBread } from '../../slices/constructorSlice';
-
-
+import {
+  getConstructorIngredients,
+  getConstructorBread
+} from '../../slices/constructorSlice';
+import { isLoadOrder } from '../../slices/orderSlice';
+import { getSuccessOrder } from '../../slices/orderSlice';
+import { postOrder } from '../../actions/ApiActions';
+import { useNavigate } from 'react-router-dom';
+import { getUserInfo } from '../../slices/userSlice';
+import { Navigate } from 'react-router-dom';
+import { packOrder } from '../../utils/packOrder';
+import { clearSuccessOrder } from '../../slices/orderSlice';
+import { clearConstructor } from '../../slices/constructorSlice';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const constructorItems = {
-    bun: {
-      price: useSelector(getConstructorPrice),
-      ...useSelector(getConstructorBread)
-    },
+    bun: useSelector(getConstructorBread),
     ingredients: useSelector(getConstructorIngredients)
   };
-  console.log(constructorItems.ingredients)
 
-  const orderRequest = false;
-
-  const orderModalData = null;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const orderRequest = useSelector(isLoadOrder);
+  const orderModalData = useSelector(getSuccessOrder);
+  const userInfo = useSelector(getUserInfo);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+    if (!userInfo.email || !userInfo.name) {
+      navigate('/login');
+      return;
+    }
+    dispatch(
+      postOrder(packOrder(constructorItems.ingredients, constructorItems.bun))
+    ).then(() => {
+      dispatch(clearConstructor());
+    });
   };
-  const closeOrderModal = () => {};
+
+  const closeOrderModal = () => {
+    navigate('/feed');
+    dispatch(clearSuccessOrder());
+  };
 
   const price = useMemo(
     () =>
