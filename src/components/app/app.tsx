@@ -28,8 +28,6 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(checkIsAuth());
-    dispatch(getFeeds());
-    dispatch(getOrders());
   }, [dispatch]);
 
   const navigate = useNavigate();
