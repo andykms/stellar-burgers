@@ -57,8 +57,7 @@ module.exports = {
     new Dotenv({
       path: './.env.example', // Явное указание пути
       systemvars: true, // Чтение системных переменных
-      safe: true, // Использовать .env.example как шаблон
-      defaults: true // Загружать значения по умолчанию
+      safe: true, // Использовать .env.example как шаблон/
     })
   ],
   resolve: {
