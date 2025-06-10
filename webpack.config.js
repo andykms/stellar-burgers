@@ -55,7 +55,7 @@ module.exports = {
       template: './public/index.html'
     }),
     new Dotenv({
-      path: './.env.example', // Явное указание пути
+      path: './.env', // Явное указание пути
       systemvars: true, // Чтение системных переменных
       safe: true, // Использовать .env.example как шаблон/
     })
