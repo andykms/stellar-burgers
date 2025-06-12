@@ -40,9 +40,6 @@ function App() {
 
   const backgroundLocation = location.state?.background;
 
-  const onCloseModal = () => {
-    navigate(-1);
-  };
   return (
     <>
       <Routes location={backgroundLocation || location}>
@@ -168,7 +165,10 @@ function App() {
           <Route
             path={'/feed/:number'}
             element={
-              <Modal title={ModalTitles.ORDER_DETAILS} onClose={onCloseModal}>
+              <Modal
+                title={ModalTitles.ORDER_DETAILS}
+                onClose={() => navigate('/feed')}
+              >
                 <OrderInfo />
               </Modal>
             }
@@ -184,7 +184,7 @@ function App() {
             element={
               <Modal
                 title={ModalTitles.INGREDIENT_DETAILS}
-                onClose={onCloseModal}
+                onClose={() => navigate(-1)}
               >
                 <IngredientDetails />
               </Modal>
@@ -199,7 +199,10 @@ function App() {
             path={'/profile/orders/:number'}
             element={
               <ProtectedRoute>
-                <Modal title={ModalTitles.ORDER_DETAILS} onClose={onCloseModal}>
+                <Modal
+                  title={ModalTitles.ORDER_DETAILS}
+                  onClose={() => navigate('/profile/orders')}
+                >
                   <OrderInfo />
                 </Modal>
               </ProtectedRoute>
