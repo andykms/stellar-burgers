@@ -21,8 +21,6 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  let linkActiveStyle = '';
-
   const ActiveLinks = {
     activeConstructor:
       currentPath === PATHS.CONSTRUCTOR ? styles.link_active : null,

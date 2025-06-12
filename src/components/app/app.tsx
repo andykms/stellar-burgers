@@ -23,6 +23,11 @@ import { getIngredients } from '../../actions/ApiActions';
 import { getOrders } from '../../actions/ApiActions';
 import { ProdectedUnauthRoute } from '../ProtectedUnauthRoute/ProtectedAuthRoute';
 
+const ModalTitles = {
+  ORDER_DETAILS: 'Детали заказа',
+  INGREDIENT_DETAILS: 'Детали ингредиента'
+};
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -163,7 +168,7 @@ function App() {
           <Route
             path={'/feed/:number'}
             element={
-              <Modal title='' onClose={onCloseModal}>
+              <Modal title={ModalTitles.ORDER_DETAILS} onClose={onCloseModal}>
                 <OrderInfo />
               </Modal>
             }
@@ -177,7 +182,10 @@ function App() {
           <Route
             path={'/ingredients/:id'}
             element={
-              <Modal title='' onClose={onCloseModal}>
+              <Modal
+                title={ModalTitles.INGREDIENT_DETAILS}
+                onClose={onCloseModal}
+              >
                 <IngredientDetails />
               </Modal>
             }
@@ -191,7 +199,7 @@ function App() {
             path={'/profile/orders/:number'}
             element={
               <ProtectedRoute>
-                <Modal title='' onClose={onCloseModal}>
+                <Modal title={ModalTitles.ORDER_DETAILS} onClose={onCloseModal}>
                   <OrderInfo />
                 </Modal>
               </ProtectedRoute>
