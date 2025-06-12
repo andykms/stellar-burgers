@@ -1,7 +1,6 @@
 import { TConstructorIngredient, TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { get } from 'http';
-import { clear } from 'console';
+import { v4 as uuidv4 } from 'uuid';
 
 //Конструктор
 export interface constructorState {
@@ -29,7 +28,7 @@ export const constructorSlice = createSlice({
       if (action.payload.type === 'bun') {
         state.bread = action.payload;
       } else {
-        const id = state.ingredients.length;
+        const id = uuidv4();
         const ingredient = { ...action.payload, id };
         state.ingredients.push(ingredient);
       }
@@ -38,9 +37,6 @@ export const constructorSlice = createSlice({
       state.ingredients = state.ingredients.filter(
         (ingredient) => ingredient.id !== action.payload.id
       );
-      state.ingredients.forEach((ingredient, index) => {
-        ingredient.id = index.toString();
-      });
     },
     upIngredient: (state, action) => {
       const currentIndex = action.payload.id;
