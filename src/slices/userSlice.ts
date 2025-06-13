@@ -55,7 +55,8 @@ export const userSlice = createSlice({
     getErrorRegister: (state) => state.errorRegister,
     getErrorForgot: (state) => state.errorForgot,
     getIsChekedAuth: (state) => state.isChekedAuth,
-    getIsAuth: (state) => state.user.name && state.user.email
+    getIsAuth: (state) =>
+      state.user.name.length > 0 && state.user.email.length > 0
   },
   extraReducers: (builder) => {
     //Получили пользователя по accessToken

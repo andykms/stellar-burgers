@@ -3,7 +3,7 @@ import { RegisterUI } from '@ui-pages';
 import { useDispatch, useSelector } from '../../services/store';
 import { registerUser } from '../../actions/ApiActions';
 import { getErrorRegister } from '../../slices/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { To, useNavigate } from 'react-router-dom';
 
 export const Register: FC = () => {
   const [userName, setUserName] = useState('');
@@ -12,13 +12,10 @@ export const Register: FC = () => {
   const error = useSelector(getErrorRegister);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(registerUser({ name: userName, email, password })).then(() => {
-      navigate('/profile');
-    });
+    dispatch(registerUser({ name: userName, email, password }));
   };
 
   return (

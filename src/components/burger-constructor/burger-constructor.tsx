@@ -9,11 +9,12 @@ import {
 import { getIsLoadOrder } from '../../slices/orderSlice';
 import { getSuccessOrder } from '../../slices/orderSlice';
 import { postOrder } from '../../actions/ApiActions';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { getUserInfo } from '../../slices/userSlice';
 import { packOrder } from '../../utils/packOrder';
 import { clearSuccessOrder } from '../../slices/orderSlice';
 import { clearConstructor } from '../../slices/constructorSlice';
+import { getIsAuth } from '../../slices/userSlice';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
@@ -26,19 +27,19 @@ export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const orderRequest = useSelector(getIsLoadOrder);
   const orderModalData = useSelector(getSuccessOrder);
-  const userInfo = useSelector(getUserInfo);
+  const isAuth = useSelector(getIsAuth);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
-    if (!userInfo.email || !userInfo.name) {
-      navigate('/login', { replace: true });
-      return;
+    if (!isAuth) {
+      navigate('/login', { state: { from: '/' } });
+    } else {
+      dispatch(
+        postOrder(packOrder(constructorItems.ingredients, constructorItems.bun))
+      ).then(() => {
+        dispatch(clearConstructor());
+      });
     }
-    dispatch(
-      postOrder(packOrder(constructorItems.ingredients, constructorItems.bun))
-    ).then(() => {
-      dispatch(clearConstructor());
-    });
   };
 
   const closeOrderModal = () => {
