@@ -15,18 +15,13 @@ import { Modal } from '@components';
 import { useEffect } from 'react';
 import { OrderInfo } from '@components';
 import { IngredientDetails } from '@components';
-import { useDispatch } from '../../services/store';
-import { checkIsAuth, getFeeds } from '../../actions/ApiActions';
+import { useDispatch, useSelector } from '../../services/store';
+import { checkIsAuth } from '../../actions/ApiActions';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getIngredients } from '../../actions/ApiActions';
-import { getOrders } from '../../actions/ApiActions';
 import { ProdectedUnauthRoute } from '../ProtectedUnauthRoute/ProtectedAuthRoute';
-
-const ModalTitles = {
-  ORDER_DETAILS: 'Детали заказа',
-  INGREDIENT_DETAILS: 'Детали ингредиента'
-};
+import { getCurrentOrder } from '../../slices/feedSlice';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,9 +30,24 @@ function App() {
     dispatch(checkIsAuth());
   }, [dispatch]);
 
+  const ModalTitles = {
+    INGREDIENT_DETAILS: 'Детали ингредиента'
+  };
+
   const navigate = useNavigate();
   const location = useLocation();
 
+  const currentOrder = useSelector(getCurrentOrder);
+  const orderDetailTitleComponent = (
+    <span className={styles.detailOrder}>
+      #{String(currentOrder?.number).padStart(6, '0')}
+    </span>
+  );
+  const ingredientDetailTitleComponent = (
+    <span className={`${styles.detailIngredient} text text_type_main-large`}>
+      {ModalTitles.INGREDIENT_DETAILS}
+    </span>
+  );
   const backgroundLocation = location.state?.background;
 
   return (
@@ -66,7 +76,10 @@ function App() {
           element={
             <div className={styles.app}>
               <AppHeader />
-              <OrderInfo />
+              <div className={styles.infoWithoutModal}>
+                {orderDetailTitleComponent}
+                <OrderInfo />
+              </div>
             </div>
           }
         />
@@ -141,7 +154,10 @@ function App() {
           element={
             <div className={styles.app}>
               <AppHeader />
-              <IngredientDetails />
+              <div className={styles.infoWithoutModal}>
+                {ingredientDetailTitleComponent}
+                <IngredientDetails />
+              </div>
             </div>
           }
         />
@@ -151,7 +167,10 @@ function App() {
             <div className={styles.app}>
               <AppHeader />
               <ProtectedRoute>
-                <OrderInfo />
+                <div className={styles.infoWithoutModal}>
+                  {orderDetailTitleComponent}
+                  <OrderInfo />
+                </div>
               </ProtectedRoute>
             </div>
           }
@@ -166,7 +185,7 @@ function App() {
             path={'/feed/:number'}
             element={
               <Modal
-                title={ModalTitles.ORDER_DETAILS}
+                title={orderDetailTitleComponent}
                 onClose={() => navigate('/feed')}
               >
                 <OrderInfo />
@@ -200,7 +219,7 @@ function App() {
             element={
               <ProtectedRoute>
                 <Modal
-                  title={ModalTitles.ORDER_DETAILS}
+                  title={orderDetailTitleComponent}
                   onClose={() => navigate('/profile/orders')}
                 >
                   <OrderInfo />

@@ -26,3 +26,19 @@
 .detailHeader {
   text-align: center;
 }
+
+.detailOrder {
+  font-family: 'Iceland';
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.infoWithoutModal {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.detailIngredient {
+  align-self: center;
+}
