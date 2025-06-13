@@ -11,8 +11,8 @@ export const ProdectedUnauthRoute: React.FC<{
   const navigate = useNavigate();
   const location = useLocation();
   if (isAuth) {
-    if (location.state) navigate(location.state.from, { replace: true });
-    else navigate('/profile', { replace: true });
+    if (location.state) return <Navigate to={location.state.from} replace />;
+    else return <Navigate to={'/profile'} replace />;
   }
 
   return <>{children}</>;

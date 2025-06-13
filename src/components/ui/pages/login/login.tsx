@@ -5,7 +5,7 @@ import {
   PasswordInput
 } from '@zlden/react-developer-burger-ui-components';
 import styles from '../common.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { LoginUIProps } from './type';
 
 export const LoginUI: FC<LoginUIProps> = ({
@@ -58,13 +58,21 @@ export const LoginUI: FC<LoginUIProps> = ({
       </form>
       <div className={`pb-4 ${styles.question} text text_type_main-default`}>
         Вы - новый пользователь?
-        <Link to='/register' className={`pl-2 ${styles.link}`}>
+        <Link
+          to='/register'
+          className={`pl-2 ${styles.link}`}
+          state={useLocation().state}
+        >
           Зарегистрироваться
         </Link>
       </div>
       <div className={`${styles.question} text text_type_main-default pb-6`}>
         Забыли пароль?
-        <Link to={'/forgot-password'} className={`pl-2 ${styles.link}`}>
+        <Link
+          to={'/forgot-password'}
+          className={`pl-2 ${styles.link}`}
+          state={useLocation().state}
+        >
           Восстановить пароль
         </Link>
       </div>

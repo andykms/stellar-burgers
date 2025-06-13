@@ -87,10 +87,10 @@ function App() {
           path={'/login'}
           element={
             <div className={styles.app}>
-              <ProdectedUnauthRoute>
+              <ProtectedRoute onOnlyUnAuth>
                 <AppHeader />
                 <Login />
-              </ProdectedUnauthRoute>
+              </ProtectedRoute>
             </div>
           }
         />
@@ -98,10 +98,10 @@ function App() {
           path={'/register'}
           element={
             <div className={styles.app}>
-              <ProdectedUnauthRoute>
+              <ProtectedRoute onOnlyUnAuth>
                 <AppHeader />
                 <Register />
-              </ProdectedUnauthRoute>
+              </ProtectedRoute>
             </div>
           }
         />
@@ -109,10 +109,10 @@ function App() {
           path={'/forgot-password'}
           element={
             <div className={styles.app}>
-              <ProdectedUnauthRoute>
+              <ProtectedRoute onOnlyUnAuth>
                 <AppHeader />
                 <ForgotPassword />
-              </ProdectedUnauthRoute>
+              </ProtectedRoute>
             </div>
           }
         />
@@ -120,17 +120,17 @@ function App() {
           path={'/reset-password'}
           element={
             <div className={styles.app}>
-              <ProdectedUnauthRoute>
+              <ProtectedRoute onOnlyUnAuth>
                 <AppHeader />
                 <ResetPassword />
-              </ProdectedUnauthRoute>
+              </ProtectedRoute>
             </div>
           }
         />
         <Route
           path={'/profile'}
           element={
-            <ProtectedRoute>
+            <ProtectedRoute onOnlyUnAuth={false}>
               <div className={styles.app}>
                 <AppHeader />
                 <Profile />
@@ -143,7 +143,7 @@ function App() {
           element={
             <div className={styles.app}>
               <AppHeader />
-              <ProtectedRoute>
+              <ProtectedRoute onOnlyUnAuth={false}>
                 <ProfileOrders />
               </ProtectedRoute>
             </div>
@@ -166,7 +166,7 @@ function App() {
           element={
             <div className={styles.app}>
               <AppHeader />
-              <ProtectedRoute>
+              <ProtectedRoute onOnlyUnAuth={false}>
                 <div className={styles.infoWithoutModal}>
                   {orderDetailTitleComponent}
                   <OrderInfo />
@@ -217,7 +217,7 @@ function App() {
           <Route
             path={'/profile/orders/:number'}
             element={
-              <ProtectedRoute>
+              <ProtectedRoute onOnlyUnAuth={false}>
                 <Modal
                   title={orderDetailTitleComponent}
                   onClose={() => navigate('/profile/orders')}
