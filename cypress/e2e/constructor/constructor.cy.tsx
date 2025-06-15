@@ -42,11 +42,11 @@ describe('Тестирование оформления заказа', () => {
     const dataCyMain = `constructor-element-${ingredientIdMain}`;
 
     //Проверяем наличие нажатых ранее ингредиентов в конструкторе
-    const ConstructorElementBunTop = cy.get(`[data-cy=${dataCyBunTop}]`);
+    const ConstructorElementBunTop = cy.get(`.${dataCyBunTop}`);
     ConstructorElementBunTop.should('exist');
-    const ConstructorElementBunBottom = cy.get(`[data-cy=${dataCyBunBottom}]`);
+    const ConstructorElementBunBottom = cy.get(`.${dataCyBunBottom}`);
     ConstructorElementBunBottom.should('exist');
-    const ConstructorElementMain = cy.get(`[data-cy=${dataCyMain}]`);
+    const ConstructorElementMain = cy.get(`.${dataCyMain}`);
     ConstructorElementMain.should('exist');
   });
 
@@ -81,7 +81,7 @@ describe('Тестирование оформления заказа', () => {
     modalContent.should('not.exist');
   });
 
-  it('Тестирование процесса заказа', ()=>{
+  it('Тестирование процесса заказа', () => {
     cy.visit('http://localhost:4000');
     cy.wait('@getIngredients');
     const ingredientIdBun = '643d69a5c3f7b9001cfa093c';
@@ -106,7 +106,7 @@ describe('Тестирование оформления заказа', () => {
     //Нас должно перенаправить на страницу логина
 
     const buttonLogin = cy.get(`[data-cy=login-button]`);
-    
+
     //Проверяем наличие кнопки логина на странице
     buttonLogin.should('exist');
 
@@ -138,20 +138,18 @@ describe('Тестирование оформления заказа', () => {
     //Проверяем, что окна больше нет
     modal.should('not.exist');
 
-    const dataCyBunTop = `constructor-element-bun-top`;
-    const dataCyBunBottom = `constructor-element-bun-bottom`;
+    const ClassNameBunTop = `constructor-element-bun-top`;
+    const ClassNameBunBottom = `constructor-element-bun-bottom`;
+    const ClassNameCyMain = `constructor-element-main`;
 
-    const ConstructorElementBunTop = cy.get(`[data-cy=${dataCyBunTop}]`);
-    //Верхняя булка больше не отображается
-    ConstructorElementBunTop.should('not.exist');
-
-    const ConstructorElementBunBottom = cy.get(`[data-cy=${dataCyBunBottom}]`);
-    //Нижняя булка больше не отображается
-    ConstructorElementBunBottom.should('not.exist');
-
-    const dataCyMain = `constructor-elements`;
-    const ConstructorElementMain = cy.get(`[data-cy=${dataCyMain}]`);
-    //Начинка пуста
-    ConstructorElementMain.should('not.exist');
-  })
+    const bunTop = cy.get(`.${ClassNameBunTop}`);
+    //Верхней булки не должно быть
+    bunTop.should('not.exist');
+    const bunBottom = cy.get(`.${ClassNameBunBottom}`);
+    //Нижней булки не должно быть
+    bunBottom.should('not.exist');
+    const main = cy.get(`.${ClassNameCyMain}`);
+    //Начинок не должно быть
+    main.should('not.exist');
+  });
 });
