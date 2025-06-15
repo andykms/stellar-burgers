@@ -9,6 +9,7 @@ import {
 } from '@zlden/react-developer-burger-ui-components';
 
 import { TBurgerIngredientUIProps } from './type';
+import clsx from 'clsx';
 
 export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
   ({ ingredient, count, handleAdd, locationState }) => {
@@ -17,7 +18,7 @@ export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
     return (
       <li className={styles.container}>
         <Link
-          className={styles.article}
+          className={`${styles.article} ingredients-link-${ingredient._id}`}
           to={`/ingredients/${_id}`}
           state={locationState}
         >
