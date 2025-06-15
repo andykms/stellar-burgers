@@ -1,8 +1,8 @@
 import { useSelector } from '../../services/store';
 import { Preloader } from '@ui';
 import { Navigate, useLocation } from 'react-router-dom';
-import { getIsChekedAuth } from '../../slices/userSlice';
-import { getIsAuth } from '../../slices/userSlice';
+import { getIsChekedAuth } from '../../slices/user/userSlice';
+import { getIsAuth } from '../../slices/user/userSlice';
 
 export interface ProtecedRouteProps {
   children: React.ReactNode;
@@ -16,7 +16,6 @@ export const ProtectedRoute = ({
   const isCheked = useSelector(getIsChekedAuth);
   const isAuth = useSelector(getIsAuth);
   const location = useLocation();
-  console.log(location);
   if (!isCheked) {
     return <Preloader />;
   }

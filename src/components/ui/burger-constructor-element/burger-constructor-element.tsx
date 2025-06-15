@@ -27,6 +27,7 @@ export const BurgerConstructorElementUI: FC<BurgerConstructorElementUIProps> =
             price={ingredient.price}
             thumbnail={ingredient.image}
             handleClose={handleClose}
+            extraClass={`constructor-element-main constructor-element-${ingredient._id}`}
           />
         </div>
       </li>

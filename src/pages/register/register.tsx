@@ -2,7 +2,7 @@ import { FC, SyntheticEvent, useState } from 'react';
 import { RegisterUI } from '@ui-pages';
 import { useDispatch, useSelector } from '../../services/store';
 import { registerUser } from '../../actions/ApiActions';
-import { getErrorRegister } from '../../slices/userSlice';
+import { getErrorRegister } from '../../slices/user/userSlice';
 import { To, useNavigate } from 'react-router-dom';
 
 export const Register: FC = () => {

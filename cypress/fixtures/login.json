@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "accessToken": "12345678",
+  "refreshToken": "87654321",
+  "user": {
+    "name": "Tralavelo Tralala",
+    "email": "bombardiroCrocodilo@TumTumTumTumTumSahur.tiktok"
+  }
+}

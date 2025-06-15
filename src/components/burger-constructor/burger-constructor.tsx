@@ -5,16 +5,16 @@ import { useSelector, useDispatch } from '../../services/store';
 import {
   getConstructorIngredients,
   getConstructorBread
-} from '../../slices/constructorSlice';
-import { getIsLoadOrder } from '../../slices/orderSlice';
-import { getSuccessOrder } from '../../slices/orderSlice';
+} from '../../slices/constructor/constructorSlice';
+import { getIsLoadOrder } from '../../slices/order/orderSlice';
+import { getSuccessOrder } from '../../slices/order/orderSlice';
 import { postOrder } from '../../actions/ApiActions';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { getUserInfo } from '../../slices/userSlice';
+import { getUserInfo } from '../../slices/user/userSlice';
 import { packOrder } from '../../utils/packOrder';
-import { clearSuccessOrder } from '../../slices/orderSlice';
-import { clearConstructor } from '../../slices/constructorSlice';
-import { getIsAuth } from '../../slices/userSlice';
+import { clearSuccessOrder } from '../../slices/order/orderSlice';
+import { clearConstructor } from '../../slices/constructor/constructorSlice';
+import { getIsAuth } from '../../slices/user/userSlice';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */

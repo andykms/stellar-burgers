@@ -1,6 +1,6 @@
 import { TIngredient } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getIngredients } from '../actions/ApiActions';
+import { getIngredients } from '../../actions/ApiActions';
 
 //Ингридиенты
 export interface ingredientsState {
@@ -43,3 +43,5 @@ export const ingredientsSlice = createSlice({
 
 export const { getIngredientsList, getIsLoadIngredients, getErrorIngredients } =
   ingredientsSlice.selectors;
+
+export const ingredientsReducer = ingredientsSlice.reducer;

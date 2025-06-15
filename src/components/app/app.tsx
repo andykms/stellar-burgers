@@ -21,7 +21,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getIngredients } from '../../actions/ApiActions';
 import { ProdectedUnauthRoute } from '../ProtectedUnauthRoute/ProtectedAuthRoute';
-import { getCurrentOrder } from '../../slices/feedSlice';
+import { getCurrentOrder } from '../../slices/feed/feedSlice';
 
 function App() {
   const dispatch = useDispatch();

@@ -12,11 +12,11 @@ import {
   getUserApi,
   updateUserApi,
   logoutApi
-} from '@api';
-import { clearUserInfo } from '../slices/userSlice';
-import { TRegisterData, TLoginData } from '@api';
+} from '../utils/burger-api';
+import { clearUserInfo } from '../slices/user/userSlice';
+import { TRegisterData, TLoginData } from '../utils/burger-api';
 import { getCookie, setCookie } from '../utils/cookie';
-import { checkAuthTrue } from '../slices/userSlice';
+import { checkAuthTrue } from '../slices/user/userSlice';
 
 function setAccessAndRefreshToken(accessToken: string, refreshToken: string) {
   setCookie('accessToken', accessToken);

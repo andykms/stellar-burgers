@@ -6,7 +6,7 @@ import { useSelector } from '../../services/store';
 import {
   getConstructorBread,
   getConstructorIngredients
-} from '../../slices/constructorSlice';
+} from '../../slices/constructor/constructorSlice';
 
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,

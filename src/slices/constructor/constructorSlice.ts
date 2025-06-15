@@ -9,7 +9,7 @@ export interface constructorState {
   newOrder: TOrder | null;
 }
 
-const initialState: constructorState = {
+export const initialState: constructorState = {
   ingredients: [],
   bread: null,
   newOrder: null
@@ -78,3 +78,5 @@ export const {
   downIngredient,
   clearConstructor
 } = constructorSlice.actions;
+
+export const constructorReducer = constructorSlice.reducer;

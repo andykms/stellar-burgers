@@ -1,6 +1,6 @@
 import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getOrders } from '../actions/ApiActions';
+import { getOrders } from '../../actions/ApiActions';
 
 //Заказы пользователя
 export interface ordersState {
@@ -43,3 +43,5 @@ export const userOrdersSlice = createSlice({
 
 export const { getUserOrders, getIsLoadUserOrders, getErrorUserOrders } =
   userOrdersSlice.selectors;
+
+export const userOrdersReducer = userOrdersSlice.reducer;
