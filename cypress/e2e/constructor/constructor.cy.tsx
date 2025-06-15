@@ -1,3 +1,5 @@
+import {setCookie} from '../../../src/utils/cookie';
+
 beforeEach(() => {
   cy.intercept('GET', 'api/ingredients', {
     fixture: 'ingredients.json',
@@ -37,8 +39,8 @@ describe('Тестирование оформления заказа', () => {
     AddButtonBun.click();
     AddButtonMain.click();
 
-    const dataCyBunTop = `constructor-element-bun-top`;
-    const dataCyBunBottom = `constructor-element-bun-bottom`;
+    const dataCyBunTop = `constructor-element-bun-top-${ingredientIdBun}`;
+    const dataCyBunBottom = `constructor-element-bun-bottom-${ingredientIdBun}`;
     const dataCyMain = `constructor-element-${ingredientIdMain}`;
 
     //Проверяем наличие нажатых ранее ингредиентов в конструкторе
@@ -84,6 +86,11 @@ describe('Тестирование оформления заказа', () => {
   it('Тестирование процесса заказа', () => {
     cy.visit('http://localhost:4000');
     cy.wait('@getIngredients');
+
+    setCookie('accessToken', '12345678');
+    localStorage.setItem('refreshToken', '87654321');
+    cy.wait('@getUser');
+
     const ingredientIdBun = '643d69a5c3f7b9001cfa093c';
     const ingredientIdMain = '643d69a5c3f7b9001cfa0943';
 
@@ -96,23 +103,7 @@ describe('Тестирование оформления заказа', () => {
     //Нажимаем на кнопки добавления ингредиентов
     AddButtonBun.click();
     AddButtonMain.click();
-
-    const button = cy.get(`.constructor-order-button`);
-
-    button.should('exist');
-
-    button.click();
-
-    //Нас должно перенаправить на страницу логина
-
-    const buttonLogin = cy.get(`[data-cy=login-button]`);
-
-    //Проверяем наличие кнопки логина на странице
-    buttonLogin.should('exist');
-
-    buttonLogin.click();
-    cy.wait('@login');
-
+    
     const newButtonOrder = cy.get('.constructor-order-button');
     //Проверяем наличие кнопки заказа на странице
     newButtonOrder.should('exist');

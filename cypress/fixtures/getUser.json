@@ -1,4 +1,7 @@
 {
-  "name": "Tralavelo Tralala",
-  "email": "bombardiroCrocodilo@TumTumTumTumTumSahur.tiktok"
+  "success": true,
+  "user": {
+    "name": "Tralavelo Tralala",
+    "email": "bombardiroCrocodilo@TumTumTumTumTumSahur.tiktok"
+  }
 }
