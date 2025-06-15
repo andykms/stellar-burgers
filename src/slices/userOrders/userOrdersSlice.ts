@@ -1,6 +1,6 @@
 import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getOrders } from '../actions/ApiActions';
+import { getOrders } from '../../actions/ApiActions';
 
 //Заказы пользователя
 export interface ordersState {

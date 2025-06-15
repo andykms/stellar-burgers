@@ -7,7 +7,7 @@ import {
   getUser,
   updateUser,
   logout
-} from '../actions/ApiActions';
+} from '../../actions/ApiActions';
 import { act } from 'react-dom/test-utils';
 
 //Пользователь

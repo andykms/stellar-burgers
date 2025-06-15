@@ -1,4 +1,4 @@
-import {setCookie} from '../../../src/utils/cookie';
+import { setCookie } from '../../../src/utils/cookie';
 
 beforeEach(() => {
   cy.intercept('GET', 'api/ingredients', {
@@ -103,7 +103,7 @@ describe('Тестирование оформления заказа', () => {
     //Нажимаем на кнопки добавления ингредиентов
     AddButtonBun.click();
     AddButtonMain.click();
-    
+
     const newButtonOrder = cy.get('.constructor-order-button');
     //Проверяем наличие кнопки заказа на странице
     newButtonOrder.should('exist');

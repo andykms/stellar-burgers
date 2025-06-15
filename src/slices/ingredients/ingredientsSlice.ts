@@ -1,6 +1,6 @@
 import { TIngredient } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getIngredients } from '../actions/ApiActions';
+import { getIngredients } from '../../actions/ApiActions';
 
 //Ингридиенты
 export interface ingredientsState {

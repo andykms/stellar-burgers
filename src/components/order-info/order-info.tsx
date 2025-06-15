@@ -4,8 +4,8 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/store';
-import { getCurrentOrder } from '../../slices/feedSlice';
-import { getIngredientsList } from '../../slices/ingredientsSlice';
+import { getCurrentOrder } from '../../slices/feed/feedSlice';
+import { getIngredientsList } from '../../slices/ingredients/ingredientsSlice';
 import { useEffect } from 'react';
 import { getOrderByNumber } from '../../actions/ApiActions';
 

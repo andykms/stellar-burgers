@@ -1,6 +1,6 @@
 import { Navigate, To } from 'react-router-dom';
 import { useSelector } from '../../services/store';
-import { getIsAuth } from '../../slices/userSlice';
+import { getIsAuth } from '../../slices/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 

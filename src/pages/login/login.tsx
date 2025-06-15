@@ -3,7 +3,7 @@ import { LoginUI } from '@ui-pages';
 import { useDispatch } from '../../services/store';
 import { loginUser } from '../../actions/ApiActions';
 import { replace, To, useNavigate } from 'react-router-dom';
-import { getErrorLogin } from '../../slices/userSlice';
+import { getErrorLogin } from '../../slices/user/userSlice';
 import { useSelector } from '../../services/store';
 
 export const Login: FC = () => {

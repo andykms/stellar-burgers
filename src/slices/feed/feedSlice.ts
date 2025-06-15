@@ -1,6 +1,6 @@
 import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getFeeds, getOrderByNumber } from '../actions/ApiActions';
+import { getFeeds, getOrderByNumber } from '../../actions/ApiActions';
 
 //Лента заказов
 export interface feedState {
