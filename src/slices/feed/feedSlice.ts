@@ -36,13 +36,16 @@ export const feedSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getOrderByNumber.pending, (state) => {
       state.error = '';
+      state.isLoad = true;
     });
     builder.addCase(getOrderByNumber.fulfilled, (state, action) => {
       state.currentOrder = action.payload.orders[0];
       state.error = '';
+      state.isLoad = false;
     });
     builder.addCase(getOrderByNumber.rejected, (state, action) => {
       state.error = action.error.message ? action.error.message : '';
+      state.isLoad = false;
     });
     builder.addCase(getFeeds.fulfilled, (state, action) => {
       state.feeds = action.payload.orders;

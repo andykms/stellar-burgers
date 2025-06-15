@@ -12,9 +12,9 @@ import {
   getUserApi,
   updateUserApi,
   logoutApi
-} from '@api';
+} from '../utils/burger-api';
 import { clearUserInfo } from '../slices/user/userSlice';
-import { TRegisterData, TLoginData } from '@api';
+import { TRegisterData, TLoginData } from '../utils/burger-api';
 import { getCookie, setCookie } from '../utils/cookie';
 import { checkAuthTrue } from '../slices/user/userSlice';
 
