@@ -48,7 +48,9 @@ export const feedSlice = createSlice({
       state.isLoad = false;
     });
     builder.addCase(getFeeds.fulfilled, (state, action) => {
-      state.feeds = action.payload.orders;
+      for (const order of action.payload.orders) {
+        state.feeds.push(order);
+      }
       state.total = action.payload.total;
       state.totalToday = action.payload.totalToday;
       state.isLoad = false;
@@ -73,3 +75,5 @@ export const {
   getErrorFeed,
   getCurrentOrder
 } = feedSlice.selectors;
+
+export const feedReducer = feedSlice.reducer;

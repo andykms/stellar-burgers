@@ -62,3 +62,5 @@ export const {
 } = orderSlice.actions;
 export const { getIsLoadOrder, getErrorOrder, getSuccessOrder } =
   orderSlice.selectors;
+
+export const orderReducer = orderSlice.reducer;

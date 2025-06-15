@@ -94,7 +94,6 @@ export const userSlice = createSlice({
       state.isLoad = true;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      console.log(action.payload.user);
       state.user = action.payload.user;
       state.isLoad = false;
       state.errorLogin = '';
@@ -115,6 +114,18 @@ export const userSlice = createSlice({
     builder.addCase(registerUser.rejected, (state, action) => {
       state.errorRegister = action.error.message ? action.error.message : '';
       state.isLoad = false;
+    });
+    builder.addCase(logout.pending, (state) => {
+      state.isLoad = true;
+      state.errorLogout = '';
+    });
+    builder.addCase(logout.fulfilled, (state, action) => {
+      state.user = {
+        name: '',
+        email: ''
+      };
+      state.isLoad = false;
+      state.errorLogout = '';
     });
     builder.addCase(logout.rejected, (state, action) => {
       state.isLoad = false;
@@ -146,3 +157,5 @@ export const {
 } = userSlice.selectors;
 
 export const { checkAuthTrue, clearUserInfo } = userSlice.actions;
+
+export const userReducer = userSlice.reducer;
