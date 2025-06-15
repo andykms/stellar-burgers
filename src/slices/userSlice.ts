@@ -8,6 +8,7 @@ import {
   updateUser,
   logout
 } from '../actions/ApiActions';
+import { act } from 'react-dom/test-utils';
 
 //Пользователь
 export interface userState {
@@ -88,6 +89,7 @@ export const userSlice = createSlice({
       state.isLoad = true;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
+      console.log(action.payload.user);
       state.user = action.payload.user;
       state.isLoad = false;
       state.errorLogin = '';
@@ -95,6 +97,7 @@ export const userSlice = createSlice({
     builder.addCase(loginUser.rejected, (state, action) => {
       state.errorLogin = action.error.message ? action.error.message : '';
       state.isLoad = false;
+      console.log(action.error.message);
     });
     //Зарегались
     builder.addCase(registerUser.pending, (state) => {

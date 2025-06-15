@@ -14,7 +14,6 @@ import clsx from 'clsx';
 export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
   ({ ingredient, count, handleAdd, locationState }) => {
     const { image, price, name, _id } = ingredient;
-    console.log(ingredient._id);
     return (
       <li className={styles.container}>
         <Link
