@@ -7,7 +7,8 @@ import {
   getUser,
   updateUser,
   logout
-} from '../actions/ApiActions';
+} from '../../actions/ApiActions';
+import { act } from 'react-dom/test-utils';
 
 //Пользователь
 export interface userState {
@@ -17,6 +18,8 @@ export interface userState {
   errorRegister: string;
   errorForgot: string;
   errorUpdate: string;
+  errorGetUser: string;
+  errorLogout: string;
   isChekedAuth: boolean;
 }
 
@@ -30,6 +33,8 @@ const initialState: userState = {
   errorRegister: '',
   errorForgot: '',
   errorUpdate: '',
+  errorGetUser: '',
+  errorLogout: '',
   isChekedAuth: false
 };
 
@@ -69,6 +74,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(getUser.rejected, (state, action) => {
       state.isLoad = false;
+      state.errorGetUser = action.error.message ? action.error.message : '';
     });
     //Обновили пользователя
     builder.addCase(updateUser.pending, (state) => {
@@ -109,8 +115,21 @@ export const userSlice = createSlice({
       state.errorRegister = action.error.message ? action.error.message : '';
       state.isLoad = false;
     });
+    builder.addCase(logout.pending, (state) => {
+      state.isLoad = true;
+      state.errorLogout = '';
+    });
+    builder.addCase(logout.fulfilled, (state, action) => {
+      state.user = {
+        name: '',
+        email: ''
+      };
+      state.isLoad = false;
+      state.errorLogout = '';
+    });
     builder.addCase(logout.rejected, (state, action) => {
       state.isLoad = false;
+      state.errorLogout = action.error.message ? action.error.message : '';
     });
     //Забыли пароль
     builder.addCase(forgotPassword.pending, (state) => {
@@ -138,3 +157,5 @@ export const {
 } = userSlice.selectors;
 
 export const { checkAuthTrue, clearUserInfo } = userSlice.actions;
+
+export const userReducer = userSlice.reducer;

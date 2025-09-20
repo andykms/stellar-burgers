@@ -1,6 +1,6 @@
 import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getFeeds, getOrderByNumber } from '../actions/ApiActions';
+import { getFeeds, getOrderByNumber } from '../../actions/ApiActions';
 
 //Лента заказов
 export interface feedState {
@@ -36,16 +36,21 @@ export const feedSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getOrderByNumber.pending, (state) => {
       state.error = '';
+      state.isLoad = true;
     });
     builder.addCase(getOrderByNumber.fulfilled, (state, action) => {
       state.currentOrder = action.payload.orders[0];
       state.error = '';
+      state.isLoad = false;
     });
     builder.addCase(getOrderByNumber.rejected, (state, action) => {
       state.error = action.error.message ? action.error.message : '';
+      state.isLoad = false;
     });
     builder.addCase(getFeeds.fulfilled, (state, action) => {
-      state.feeds = action.payload.orders;
+      for (const order of action.payload.orders) {
+        state.feeds.push(order);
+      }
       state.total = action.payload.total;
       state.totalToday = action.payload.totalToday;
       state.isLoad = false;
@@ -70,3 +75,5 @@ export const {
   getErrorFeed,
   getCurrentOrder
 } = feedSlice.selectors;
+
+export const feedReducer = feedSlice.reducer;

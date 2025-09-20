@@ -1,6 +1,6 @@
 import { TOrder } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getOrderByNumber, postOrder } from '../actions/ApiActions';
+import { getOrderByNumber, postOrder } from '../../actions/ApiActions';
 
 export interface OrderState {
   ingredients: string[];
@@ -62,3 +62,5 @@ export const {
 } = orderSlice.actions;
 export const { getIsLoadOrder, getErrorOrder, getSuccessOrder } =
   orderSlice.selectors;
+
+export const orderReducer = orderSlice.reducer;

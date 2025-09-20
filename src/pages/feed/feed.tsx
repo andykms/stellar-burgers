@@ -3,7 +3,7 @@ import { FeedUI } from '@ui-pages';
 import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
-import { getFeedsList } from '../../slices/feedSlice';
+import { getFeedsList } from '../../slices/feed/feedSlice';
 import { getFeeds } from '../../actions/ApiActions';
 
 export const Feed: FC = () => {
